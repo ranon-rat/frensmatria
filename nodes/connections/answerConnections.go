@@ -2,6 +2,7 @@ package connections
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/pion/webrtc/v3"
 	"github.com/ranon-rat/frensmatria/nodes/channels"
@@ -14,16 +15,24 @@ func ONAnswer() {
 			panic(err)
 		}
 
-		// Crear un canal de datos y manejar su apertura
+		// we create a channel of data
 		peerConn.OnDataChannel(func(d *webrtc.DataChannel) {
-			fmt.Println("Canal de datos recibido en Nodo B")
+			fmt.Println("we are open")
 			d.OnOpen(func() {
-				fmt.Println("Canal de datos abierto en Nodo B")
+				fmt.Println("finally")
+
+				for {
+					if d.SendText("sup dude, message sended from this client") != nil {
+						break
+					}
+
+					time.Sleep(time.Second)
+
+				}
 			})
 
-			// Manejar recepción de mensajes
 			d.OnMessage(func(msg webrtc.DataChannelMessage) {
-				fmt.Printf("Mensaje recibido en Nodo B: %s\n", string(msg.Data))
+				fmt.Printf("message: %s\n", string(msg.Data))
 			})
 		})
 		SDP := <-SDPOfferChan
@@ -46,14 +55,13 @@ func ONAnswer() {
 
 		}
 		gatherComplete := webrtc.GatheringCompletePromise(peerConn)
-		// Establecer la respuesta como descripción local
+
 		err = peerConn.SetLocalDescription(answer)
 		if err != nil {
 			fmt.Println("116", err)
 			continue
 		}
 
-		// Esperar hasta que la recolección de ICE esté completa
 		<-gatherComplete
 		fmt.Println("everything has passed")
 		channels.SDPChanAnswer <- peerConn.LocalDescription().SDP

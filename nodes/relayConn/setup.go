@@ -5,6 +5,7 @@ import (
 	"net"
 )
 
+// this connects to the relay
 func Initialize(relayAddrs string) {
 	conn, err := net.Dial("tcp", relayAddrs)
 	if err != nil {
@@ -16,6 +17,7 @@ func Initialize(relayAddrs string) {
 	ConnChan <- conn
 }
 
+// this is for starting the connections and everythign
 func SetupVariables() {
 
 	rConn = <-ConnChan

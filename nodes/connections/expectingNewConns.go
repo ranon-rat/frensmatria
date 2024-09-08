@@ -14,10 +14,10 @@ its quite useful specially for mantaining some kind of stability
 
 use it in a goroutine
 */
-func StartPeer() string {
-	// esto va a manejar multiples conexiones
+func OfferConnections() string {
+	// this is for handling multiple connections
 	for {
-		// so we create a new channel of data
+
 		peerConn, err := webrtc.NewPeerConnection(Config)
 		if err != nil {
 			panic(err)
@@ -28,10 +28,9 @@ func StartPeer() string {
 			panic(err)
 		}
 
-		// Manejar la apertura del canal de datos
-		// puedo simplemente mantener el dataChannel fuera de esto creo
+		// so this is just when it opens
 		dataChannel.OnOpen(func() {
-			fmt.Println("Canal de datos abierto en Main-node")
+			fmt.Println("we have our channel open sheesh ")
 			for {
 
 				err := dataChannel.SendText("sup dude")
@@ -42,29 +41,29 @@ func StartPeer() string {
 			}
 		})
 
-		// Manejar mensajes recibidos en el canal de datos
+		// this will handle the messages received
 		dataChannel.OnMessage(func(msg webrtc.DataChannelMessage) {
-			fmt.Printf("Mensaje recibido: %s\n", string(msg.Data))
+			fmt.Printf("new message: %s\n", string(msg.Data))
 		})
 
-		// Crear la oferta SDP para enviarla a otros nodos
+		// we create an SDP offer
 		offer, err := peerConn.CreateOffer(nil)
 		if err != nil {
 			panic(err)
 		}
 		gatherComplete := webrtc.GatheringCompletePromise(peerConn)
 
-		// Establecer la oferta como descripción local
+		// We put it in our  local description
 		err = peerConn.SetLocalDescription(offer)
 		if err != nil {
 			panic(err)
 		}
 
-		// Esperar a que la recolección de candidatos ICE termine
+		// we wait until we gather all the data
 		<-gatherComplete
-		// Mostrar la oferta para que los otros nodos la utilicen
+		// i share this with other possible nodes, this is just for updating the sdp
 		channels.SDPChanInivitation <- peerConn.LocalDescription().SDP
-		// espero a que se me invite a una respuesta
+		// i wait until someone wants to join
 		answerSDP := <-SDPAnswerChan
 
 		answer := webrtc.SessionDescription{

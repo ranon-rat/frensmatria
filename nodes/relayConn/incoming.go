@@ -7,6 +7,9 @@ import (
 	"github.com/ranon-rat/frensmatria/nodes/channels"
 )
 
+/*
+with this we can handle the relay answers
+*/
 func RelayNewConns() {
 	defer rConn.Close()
 	if nID == "" {
@@ -33,6 +36,10 @@ func RelayNewConns() {
 	}
 
 }
+
+/*
+with this we update the SDP, its quite important and we have to take it into our mind
+*/
 func ActualizeSDP() {
 
 	for {

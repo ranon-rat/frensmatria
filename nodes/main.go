@@ -14,7 +14,7 @@ func main() {
 	idNode := flag.String("node", "", "is just the id that the relay generats, use it to connect with someone else")
 	flag.Parse()
 
-	go connections.StartPeer()
+	go connections.OfferConnections()
 	go connections.ONAnswer()
 	go relayConn.Initialize(*relayAddrs)
 	go relayConn.ActualizeSDP()
