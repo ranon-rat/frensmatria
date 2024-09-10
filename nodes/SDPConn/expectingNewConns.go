@@ -1,21 +1,19 @@
-package connections
+package SDPConn
 
 import (
-	"fmt"
-	"time"
-
 	"github.com/pion/webrtc/v3"
 	"github.com/ranon-rat/frensmatria/nodes/channels"
+	"github.com/ranon-rat/frensmatria/nodes/connections"
 )
 
 /*
-this function works for mantaining multiple client connections between nodes
+this function works for mantaining multiple client SDPConn between nodes
 its quite useful specially for mantaining some kind of stability
 
 use it in a goroutine
 */
-func OfferConnections() string {
-	// this is for handling multiple connections
+func OfferSDPConn() string {
+	// this is for handling multiple SDPConn
 	for {
 
 		peerConn, err := webrtc.NewPeerConnection(Config)
@@ -27,23 +25,27 @@ func OfferConnections() string {
 		if err != nil {
 			panic(err)
 		}
+		closeChan := make(chan struct{})
+		msgChan := make(chan webrtc.DataChannelMessage)
 
 		// so this is just when it opens
 		dataChannel.OnOpen(func() {
-			fmt.Println("we have our channel open sheesh ")
-			for {
-
-				err := dataChannel.SendText("sup dude")
-				if err != nil {
-					break
-				}
-				time.Sleep(time.Second)
+			connections.ConnInfoChan <- connections.ConnectionInfo{
+				CloseChan:  closeChan,
+				MsgChan:    msgChan,
+				Connection: dataChannel,
 			}
+
+		})
+		dataChannel.OnClose(func() {
+
+			closeChan <- struct{}{}
+
 		})
 
 		// this will handle the messages received
 		dataChannel.OnMessage(func(msg webrtc.DataChannelMessage) {
-			fmt.Printf("new message: %s\n", string(msg.Data))
+			msgChan <- msg
 		})
 
 		// we create an SDP offer

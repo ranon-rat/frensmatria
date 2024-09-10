@@ -12,7 +12,7 @@ var (
 	rReader *json.Decoder
 	// node id
 	nID string
-	// channels for initializing our connections
+	// channels for initializing our SDPConn
 	ConnChan   = make(chan net.Conn)
 	ReaderChan = make(chan *json.Decoder)
 	IDchan     = make(chan string)

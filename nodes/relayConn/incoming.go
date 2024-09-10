@@ -13,13 +13,11 @@ with this we can handle the relay answers
 func RelayNewConns() {
 	defer rConn.Close()
 	if nID == "" {
-		// with this i just manage other stuff
 		var res core.IDResponse
 		// i continue iin my journey
 		if rReader.Decode(&res) != nil {
 			panic("relay problems")
 		}
-		// we send them to a channel
 		IDchan <- res.ID
 	}
 	for {
@@ -31,7 +29,6 @@ func RelayNewConns() {
 			// i cannot send this
 			continue
 		}
-
 		channels.SDPChan <- body
 	}
 
@@ -48,8 +45,6 @@ func ActualizeSDP() {
 			SDPOffer: SDP,
 			IDNode:   "",
 		})
-
 		// with this i just manage other stuff
-
 	}
 }

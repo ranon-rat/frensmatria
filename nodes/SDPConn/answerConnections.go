@@ -1,11 +1,11 @@
-package connections
+package SDPConn
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/pion/webrtc/v3"
 	"github.com/ranon-rat/frensmatria/nodes/channels"
+	"github.com/ranon-rat/frensmatria/nodes/connections"
 )
 
 func ONAnswer() {
@@ -17,22 +17,22 @@ func ONAnswer() {
 
 		// we create a channel of data
 		peerConn.OnDataChannel(func(d *webrtc.DataChannel) {
-			fmt.Println("we are open")
+			closeChan := make(chan struct{})
+			msgChan := make(chan webrtc.DataChannelMessage)
 			d.OnOpen(func() {
-				fmt.Println("finally")
-
-				for {
-					if d.SendText("sup dude, message sended from this client") != nil {
-						break
-					}
-
-					time.Sleep(time.Second)
-
+				connections.ConnInfoChan <- connections.ConnectionInfo{
+					CloseChan:  closeChan,
+					MsgChan:    msgChan,
+					Connection: d,
 				}
-			})
 
+			})
+			d.OnClose(func() {
+				closeChan <- struct{}{}
+
+			})
 			d.OnMessage(func(msg webrtc.DataChannelMessage) {
-				fmt.Printf("message: %s\n", string(msg.Data))
+				msgChan <- msg
 			})
 		})
 		SDP := <-SDPOfferChan
@@ -63,7 +63,6 @@ func ONAnswer() {
 		}
 
 		<-gatherComplete
-		fmt.Println("everything has passed")
 		channels.SDPChanAnswer <- peerConn.LocalDescription().SDP
 	}
 }

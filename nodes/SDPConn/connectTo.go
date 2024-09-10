@@ -1,4 +1,4 @@
-package connections
+package SDPConn
 
 import (
 	"fmt"
@@ -23,7 +23,6 @@ func ConnectToNodes() {
 		case core.Confirm:
 			SDPAnswerChan <- answerSDP.SDP
 		default:
-			fmt.Println(answerSDP)
 			continue
 		}
 

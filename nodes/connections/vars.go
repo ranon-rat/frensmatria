@@ -2,16 +2,13 @@ package connections
 
 import "github.com/pion/webrtc/v3"
 
-var (
-	Config = webrtc.Configuration{
-		ICEServers: []webrtc.ICEServer{
-			{
-				URLs: []string{"stun:stun.l.google.com:19302"}, // Servidor STUN
-			},
-		},
-	}
-	// so these are the escential variables hmm
+type ConnectionInfo struct {
+	CloseChan  chan struct{}
+	Connection *webrtc.DataChannel
+	MsgChan    chan webrtc.DataChannelMessage
+}
 
-	SDPAnswerChan = make(chan string)
-	SDPOfferChan  = make(chan string)
+var (
+	ConnInfoChan = make(chan ConnectionInfo)
+	Conns        = make(map[*webrtc.DataChannel]bool)
 )
