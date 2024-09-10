@@ -2,6 +2,8 @@ package connections
 
 import (
 	"fmt"
+
+	"github.com/ranon-rat/frensmatria/core"
 )
 
 func HandleEventConns() {
@@ -12,9 +14,14 @@ func HandleEventConns() {
 		closeChan := connInfo.CloseChan
 		msgChan := connInfo.MsgChan
 		conn := connInfo.Connection
+		ID := core.RandStringRunes(10)
 
 		fmt.Println("sup we are back")
-		//SDPConn[conn] = true
+		cID := ConnectionID{
+			ID:         ID,
+			Connection: conn,
+		}
+		Conns[cID] = true
 
 		// so this will be listening when we close the channel
 		go func() {
@@ -24,12 +31,12 @@ func HandleEventConns() {
 			for {
 
 				msg := <-msgChan
-				OnMessage(conn, msg)
+				OnMessage(conn, msg, ID)
 			}
 		}()
 		go func() {
 			<-closeChan
-			OnClose(conn)
+			OnClose(cID)
 			//delete(SDPConn, conn)
 		}()
 

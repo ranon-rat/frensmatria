@@ -80,10 +80,7 @@ func main() {
 	defer server.Close()
 	fmt.Println("starting server")
 	ip, _ := core.GetLocalIP()
-	// esto servira sobre todo para poder sacar cierta informacion
 	fmt.Printf("you can connect via %s:%s\n", ip, port)
-
-	// ahora envio esto al servidor
 
 	for {
 

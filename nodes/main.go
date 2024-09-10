@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
+	"os"
 
 	"github.com/ranon-rat/frensmatria/nodes/SDPConn"
 	"github.com/ranon-rat/frensmatria/nodes/connections"
@@ -20,9 +22,18 @@ func main() {
 	relayConn.Setup(*relayAddrs, *idNode)
 
 	// this handles the events
+	// okay so this seems to be quite simple
 	go connections.HandleEventConns()
+	go connections.SendMessages()
 
 	fmt.Println("share this ID:", relayConn.GiveID())
-
+	go func() {
+		for {
+			fmt.Print("> ")
+			reader := bufio.NewReader(os.Stdin)
+			content, _ := reader.ReadString('\n')
+			connections.SetMSG(content, "")
+		}
+	}()
 	select {}
 }
