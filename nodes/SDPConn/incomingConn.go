@@ -11,7 +11,7 @@ its quite useful specially for mantaining some kind of stability
 
 use it in a goroutine
 */
-func OfferSDPConn() string {
+func IncomingConn() string {
 	// this is for handling multiple SDPConn
 	for {
 
@@ -26,23 +26,15 @@ func OfferSDPConn() string {
 		}
 
 		// so we add some events here for talkign with the other folders
-		DataChannelHandler(dataChannel)
+		dcHandler(dataChannel)
 
 		// we create an SDP offer
 		offer, err := peerConn.CreateOffer(nil)
 		if err != nil {
 			panic(err)
 		}
-		gatherComplete := webrtc.GatheringCompletePromise(peerConn)
+		GetICE(peerConn, offer)
 
-		// We put it in our  local description
-		err = peerConn.SetLocalDescription(offer)
-		if err != nil {
-			panic(err)
-		}
-
-		// we wait until we gather all the data
-		<-gatherComplete
 		// i share this with other possible nodes, this is just for updating the sdp
 		channels.SDPChanInivitation <- peerConn.LocalDescription().SDP
 		// i wait until someone wants to join

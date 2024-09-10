@@ -1,7 +1,7 @@
 package SDPConn
 
 func Setup() {
-	go OfferSDPConn()
-	go ONAnswer()
+	go IncomingConn()
+	go EnterConn()
 	go ConnectToNodes()
 }

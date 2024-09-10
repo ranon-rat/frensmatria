@@ -9,14 +9,13 @@ import (
 
 /*
 with this we can handle multiple invitations and information that can come in any moment.
-Its quite importan specially for making bigger things
+Its quite important specially for making bigger things
 */
 func ConnectToNodes() {
 	for {
 		// con esto ya puedo mantener mis conexiones y otras cosas
 		answerSDP := <-channels.SDPChan
 		fmt.Println("new connection")
-
 		switch answerSDP.Kind {
 		case core.ConnectTo:
 			SDPOfferChan <- answerSDP.SDP

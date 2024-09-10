@@ -14,22 +14,20 @@ func Initialize(relayAddrs string) {
 	}
 
 	// we send them to a channel
-	ConnChan <- conn
-}
+	rConn = conn
+	rReader = json.NewDecoder(conn)
 
-// this is for starting the SDPConn and everythign
-func SetupVariables() {
-
-	rConn = <-ConnChan
-	rReader = json.NewDecoder(rConn)
 }
 
 func Setup(relayAddrs, idNode string) {
-	go Initialize(relayAddrs)
-	SetupVariables()
+	// start the server
+	Initialize(relayAddrs)
+	// this is just for controlling other stuff
 	go ActualizeSDP()
 	go RelayNewConns()
+	// i need to wait until i receive the Node ID
 	nID = <-IDchan
+	// this is only when our node is a client :D
 	if idNode != "" {
 		ConnectTo(idNode)
 		go SendOffering(idNode)

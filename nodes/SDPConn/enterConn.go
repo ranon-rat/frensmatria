@@ -7,7 +7,7 @@ import (
 	"github.com/ranon-rat/frensmatria/nodes/channels"
 )
 
-func ONAnswer() {
+func EnterConn() {
 	for {
 		peerConn, err := webrtc.NewPeerConnection(Config)
 		if err != nil {
@@ -16,36 +16,28 @@ func ONAnswer() {
 
 		// we create a channel of data
 		peerConn.OnDataChannel(func(d *webrtc.DataChannel) {
-			DataChannelHandler(d)
+			dcHandler(d)
 		})
 		SDP := <-SDPOfferChan
 		offer := webrtc.SessionDescription{
 			Type: webrtc.SDPTypeOffer,
 			SDP:  SDP,
 		}
-		err = peerConn.SetRemoteDescription(offer)
-		if err != nil {
-			fmt.Println("100", err)
 
+		if err = peerConn.SetRemoteDescription(offer); err != nil {
+			fmt.Println(err)
 			continue
 		}
 
 		// Crear una respuesta SDP
 		answer, err := peerConn.CreateAnswer(nil)
 		if err != nil {
-			fmt.Println("108", err)
+			fmt.Println(err)
 			continue
 
 		}
-		gatherComplete := webrtc.GatheringCompletePromise(peerConn)
+		GetICE(peerConn, answer)
 
-		err = peerConn.SetLocalDescription(answer)
-		if err != nil {
-			fmt.Println("116", err)
-			continue
-		}
-
-		<-gatherComplete
 		channels.SDPChanAnswer <- peerConn.LocalDescription().SDP
 	}
 }
