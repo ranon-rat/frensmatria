@@ -40,9 +40,7 @@ func manageConnections(c net.Conn) {
 		if reader.Decode(&conInterest) != nil {
 			break
 		}
-		// this looks good enough tbh, later i will be making something so it requires a password to enter
-		//shushing
-		// it should be expecting a new connection so what this will be doing is just checking which ip is the user interested in
+		//  in this case the client is interested in someone else sdp
 		if conInterest.SDPOffer == "" {
 			v, e := addresses[conInterest.IDNode]
 			if !e {
@@ -52,12 +50,13 @@ func manageConnections(c net.Conn) {
 			json.NewEncoder(c).Encode(core.Initial{SDP: v, Kind: core.ConnectTo})
 			continue
 		}
-		// deberia de agregar algo para poder conectarme a varios creo
 
+		// in this case this will update your sdp
 		if conInterest.IDNode == "" && conInterest.SDPOffer != "" { // this will add more stuff to it
 			addresses[ID] = conInterest.SDPOffer
 			continue
 		}
+		// and this just sends the sdp to the other guy
 		cconn, e := connections[conInterest.IDNode]
 		if !e {
 			// empty

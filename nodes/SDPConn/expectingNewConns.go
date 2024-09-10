@@ -3,7 +3,6 @@ package SDPConn
 import (
 	"github.com/pion/webrtc/v3"
 	"github.com/ranon-rat/frensmatria/nodes/channels"
-	"github.com/ranon-rat/frensmatria/nodes/connections"
 )
 
 /*
@@ -20,33 +19,14 @@ func OfferSDPConn() string {
 		if err != nil {
 			panic(err)
 		}
-
+		//the panic stuff is just in case something is not workign
 		dataChannel, err := peerConn.CreateDataChannel("data", nil)
 		if err != nil {
 			panic(err)
 		}
-		closeChan := make(chan struct{})
-		msgChan := make(chan webrtc.DataChannelMessage)
 
-		// so this is just when it opens
-		dataChannel.OnOpen(func() {
-			connections.ConnInfoChan <- connections.ConnectionInfo{
-				CloseChan:  closeChan,
-				MsgChan:    msgChan,
-				Connection: dataChannel,
-			}
-
-		})
-		dataChannel.OnClose(func() {
-
-			closeChan <- struct{}{}
-
-		})
-
-		// this will handle the messages received
-		dataChannel.OnMessage(func(msg webrtc.DataChannelMessage) {
-			msgChan <- msg
-		})
+		// so we add some events here for talkign with the other folders
+		DataChannelHandler(dataChannel)
 
 		// we create an SDP offer
 		offer, err := peerConn.CreateOffer(nil)

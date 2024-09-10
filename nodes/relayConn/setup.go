@@ -23,17 +23,13 @@ func SetupVariables() {
 	rConn = <-ConnChan
 	rReader = json.NewDecoder(rConn)
 }
-func SetupID() {
-	nID = <-IDchan
-
-}
 
 func Setup(relayAddrs, idNode string) {
 	go Initialize(relayAddrs)
 	SetupVariables()
 	go ActualizeSDP()
 	go RelayNewConns()
-	SetupID()
+	nID = <-IDchan
 	if idNode != "" {
 		ConnectTo(idNode)
 		go SendOffering(idNode)
