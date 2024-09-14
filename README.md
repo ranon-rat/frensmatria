@@ -2,7 +2,7 @@
 its just a simple p2p network for studying and adding multiple information.
 
 Its not finished, for now we have to actually implement many of this things, possibly the relay will have to change.
-![alt text](lookup.png)
+![alt text](images/lookup.png)
 
 
 ## how to test it
