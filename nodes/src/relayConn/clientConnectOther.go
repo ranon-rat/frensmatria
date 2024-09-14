@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/ranon-rat/frensmatria/core"
-	"github.com/ranon-rat/frensmatria/nodes/channels"
+	"github.com/ranon-rat/frensmatria/nodes/src/core/channels"
 )
 
 func ConnectTo(id string) {

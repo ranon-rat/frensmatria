@@ -1,0 +1,149 @@
+:root {
+    --bg-color: #030508;
+    --text-color: #a0b0c0;
+    --accent-color: #1a3b6d;
+    --secondary-color: #1a1e24;
+    --highlight-color: #00a864;
+    --border-color: #142848;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1, h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin: 20px 0;
+    color: var(--accent-color);
+}
+
+h2 {
+    font-size: 2em;
+}
+
+.content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+input, button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1em;
+}
+
+button {
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: var(--accent-color);
+}
+
+button:hover {
+    background-color: #234b8a;
+}
+
+#gematria-list, #results-table {
+    list-style-type: none;
+    padding: 0;
+}
+
+#gematria-list li, #results-table td {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: rgba(26, 59, 109, 0.1);
+    border: 1px solid var(--border-color);
+}
+
+#upload-status {
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.gematria-values {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.shouldnt-be-render{
+    margin: 8px;
+
+}
+.gematria-value {
+    margin: 8px;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    background-color: rgba(26, 59, 109, 0.1);
+    text-align: center;
+}
+
+.gematria-result {
+    margin-left: 20px;
+    font-size: 1.2em;
+    color: var(--highlight-color);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+th, td {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: rgba(26, 59, 109, 0.2);
+}
+
+nav {
+    background-color: rgba(26, 59, 109, 0.2);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav ul li {
+    padding: 15px;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: all 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--highlight-color);
+}
+
+.section {
+    margin-top: 20px;
+}

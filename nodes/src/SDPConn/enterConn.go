@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/pion/webrtc/v3"
-	"github.com/ranon-rat/frensmatria/nodes/channels"
+	"github.com/ranon-rat/frensmatria/nodes/src/core/channels"
 )
 
 func EnterConn() {

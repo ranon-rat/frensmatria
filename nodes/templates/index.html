@@ -1,0 +1,43 @@
+<html>
+
+{{template "head"}}
+
+<body>
+    {{template "nav-bar"}}
+
+    <div class="content">
+        <h1>Frensmatria</h1>
+        <div id="gematria" class="section">
+            {{template "search-gematria"}}
+            <ul id="gematria-list"></ul>
+        
+            {{if .Search}}
+            {{if .NotInt}}
+            <h2>
+                Simple Gematria
+            </h2>
+            <div class="gematria-values">
+                {{range .SimpleGematriaValues}}
+                {{if .Should}}
+                <div class="gematria-value">{{.Rune}}<br>{{.Value}}</div>
+                {{else}}
+                <span class="shouldnt-be-render">+</span>
+                {{end}}
+                {{end}}
+                
+                <div class="gematria-result">= {{.SimpleGematriaSum}}</div>
+
+            </div>
+            {{end}}
+
+            {{template "results"}}
+            {{end}}
+            {{if .NotInt}}
+            {{template "upload"}}
+            {{end}}
+        </div>
+    </div>
+    
+</body>
+
+</html>

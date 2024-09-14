@@ -6,12 +6,17 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ranon-rat/frensmatria/nodes/SDPConn"
-	"github.com/ranon-rat/frensmatria/nodes/connections"
-	"github.com/ranon-rat/frensmatria/nodes/relayConn"
+	"github.com/ranon-rat/frensmatria/nodes/src/SDPConn"
+	"github.com/ranon-rat/frensmatria/nodes/src/connections"
+	"github.com/ranon-rat/frensmatria/nodes/src/relayConn"
+	"github.com/ranon-rat/frensmatria/nodes/src/router"
 )
 
-func main() {
+/*
+so i think that i will be avoiding to add anything quite interesting here
+*/
+
+func SimpleChatUseWebRTC() {
 	// some simple shit for using it later
 	relayAddrs := flag.String("relay", "localhost:8080", "just connect to a relay so we can hole punch")
 	idNode := flag.String("node", "", "is just the id that the relay generats, use it to connect with someone else")
@@ -36,4 +41,8 @@ func main() {
 		}
 	}()
 	select {}
+}
+func main() {
+	router.Setup()
+
 }

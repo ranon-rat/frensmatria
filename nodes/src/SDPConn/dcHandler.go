@@ -2,7 +2,7 @@ package SDPConn
 
 import (
 	"github.com/pion/webrtc/v3"
-	"github.com/ranon-rat/frensmatria/nodes/connections"
+	"github.com/ranon-rat/frensmatria/nodes/src/connections"
 )
 
 /*
