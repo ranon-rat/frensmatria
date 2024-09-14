@@ -2,8 +2,14 @@
 its just a simple p2p network for studying and adding multiple information.
 
 Its not finished, for now we have to actually implement many of this things, possibly the relay will have to change.
+![alt text](lookup.png)
 
+
+## how to test it
+just run the file `nodes/main.go`, at this moment i am working on building the website and the database so, for now you cant test anything related to the p2p stuff.
+At least for now.
 ## TODO
+
 
 - [x] communication between nodes
 - [x] a relay for sharing the SDP descriptor between nodes
