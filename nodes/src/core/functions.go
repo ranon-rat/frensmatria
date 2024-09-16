@@ -8,14 +8,14 @@ func CalculateAllGematrias(input string) []Gematrias {
 		values := GematriaVals[g.ValuesName]
 		switch g.Kind {
 		case sumGematria:
-			values, sum := GeneralAdditionGematriaCalculator(input, values)
+			values, sum := GeneralAdditionGematriaCalculator(input+" ", values)
 			out = append(out, Gematrias{
 				Name:   n,
 				Sum:    sum,
 				Values: values,
 			})
 		case fractalGematria:
-			values, sum := GeneralFractalGematriaCalculator(input, values)
+			values, sum := GeneralFractalGematriaCalculator(input+" ", values)
 			out = append(out, Gematrias{
 				Name:   n,
 				Sum:    sum,
@@ -31,18 +31,35 @@ func CalculateAllGematrias(input string) []Gematrias {
 	return out
 }
 func GeneralFractalGematriaCalculator(input string, gematriaValues map[rune]int) ([]GematriaValue, int) {
-	values := make([]GematriaValue, len(input))
+	values := []GematriaValue{}
 	s := 0
-	for i, v := range input {
+	spaceS := 0
+	lastTrue := true
+	trueValue := 0
+	for _, v := range input {
+		var r GematriaValue
 		// i just get the numerical value and if it exists i just use it
 		vn, e := gematriaValues[v]
 		if !e {
+			if lastTrue {
+				continue
+			}
+			r.Value = spaceS
+			r.Should = false
+			values = append(values, r)
+			spaceS = 0
+			lastTrue = true
 			continue
 		}
-		s += vn * (i + 1)
-		values[i].Value = vn * (i + 1)
-		values[i].Rune = string(v)
-		values[i].Should = true
+		k := vn * (trueValue + 1)
+		s += k
+		spaceS += k
+		r.Value = k
+		r.Rune = string(v)
+		r.Should = true
+		values = append(values, r)
+		lastTrue = false
+		trueValue++
 	}
 	return values, s
 
@@ -50,18 +67,33 @@ func GeneralFractalGematriaCalculator(input string, gematriaValues map[rune]int)
 
 // this will be used for cool important stuff
 func GeneralAdditionGematriaCalculator(input string, gematriaValues map[rune]int) ([]GematriaValue, int) {
-	values := make([]GematriaValue, len(input))
+	values := []GematriaValue{}
 	s := 0
-	for i, v := range input {
+	spaceS := 0
+	lastTrue := true
+	for _, v := range input {
+		var r GematriaValue
 		// i just get the numerical value and if it exists i just use it
 		vn, e := gematriaValues[v]
 		if !e {
+			if lastTrue {
+				continue
+			}
+			r.Value = spaceS
+			r.Should = false
+			values = append(values, r)
+			spaceS = 0
+			lastTrue = true
 			continue
 		}
-		values[i].Value = vn
-		s += gematriaValues[v]
-		values[i].Rune = string(v)
-		values[i].Should = true
+		s += vn
+		spaceS += vn
+		r.Value = vn
+		r.Rune = string(v)
+		r.Should = true
+		values = append(values, r)
+		lastTrue = false
+
 	}
 	return values, s
 }

@@ -1,0 +1,23 @@
+{{define "gematria-results"}}
+
+{{range .}}
+<h2>
+    {{.Name}}
+</h2>    
+
+<div class="gematria-values">
+ 
+    {{range .Values}}
+    {{if .Should}}
+    <div class="gematria-value">{{.Rune}}<br>{{.Value}}</div>
+    {{else}}
+    <span class="shouldnt-be-render">{{.Value}}</span>
+    {{end}}
+    {{end}}
+    
+    <div class="gematria-result">= {{.Sum}}</div>
+
+</div>
+{{end}}
+
+{{end}}

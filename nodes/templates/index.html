@@ -8,42 +8,34 @@
     <div class="content">
         <h1>Frensmatria</h1>
         <div id="gematria" class="section">
-            {{template "search-gematria"}}
+            {{template "search-gematria" .SearchInput}}
             <ul id="gematria-list"></ul>
-        
+
             {{if .Search}}
-            {{if .NotInt}}
-            {{range .GematriaList}}
-            <h2>
-                {{.Name}}
-            </h2>    
-         
-            <div class="gematria-values">
-             
-                {{range .Values}}
-                {{if .Should}}
-                <div class="gematria-value">{{.Rune}}<br>{{.Value}}</div>
-                {{else}}
-                <span class="shouldnt-be-render">+</span>
+            <!--
+en caso de que no sea un numero
+            -->
+                {{if .NotInt}}
+            <!--
+                    esto solo va a mostrar los resultados
+                -->
+                    {{template "gematria-results" .GematriaList}}
                 {{end}}
-                {{end}}
-                
-                <div class="gematria-result">= {{.Sum}}</div>
-
-            </div>
+            <!--
+                esto solo va a mostrar los resultados
+            -->
+                {{template "results"}}
             {{end}}
-           
-            
-            {{end}}
-
-            {{template "results"}}
-            {{end}}
+            <!--
+                this little button is just for getting searching results in case i am trying to find something new
+        
+            -->
             {{if .NotInt}}
-            {{template "upload"}}
+                {{template "upload"}}
             {{end}}
         </div>
     </div>
-    
+
 </body>
 
 </html>
