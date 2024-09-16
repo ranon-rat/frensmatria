@@ -2,11 +2,11 @@
 
 {{range .}}
 <h2>
-    {{.Name}}
-</h2>    
+    {{.ShowName}}
+</h2>
 
 <div class="gematria-values">
- 
+
     {{range .Values}}
     {{if .Should}}
     <div class="gematria-value">{{.Rune}}<br>{{.Value}}</div>
@@ -14,7 +14,7 @@
     <span class="shouldnt-be-render">{{.Value}}</span>
     {{end}}
     {{end}}
-    
+
     <div class="gematria-result">= {{.Sum}}</div>
 
 </div>

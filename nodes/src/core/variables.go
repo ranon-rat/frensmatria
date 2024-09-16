@@ -28,7 +28,7 @@ var (
 		},
 		"synx": {
 			Kind:       sumGematria,
-			ShowName:   "synx",
+			ShowName:   "Synx",
 			ValuesName: "synx"},
 	}
 	GematriaVals = map[string]map[rune]int{
