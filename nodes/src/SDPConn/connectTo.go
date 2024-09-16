@@ -3,7 +3,7 @@ package SDPConn
 import (
 	"fmt"
 
-	"github.com/ranon-rat/frensmatria/core"
+	"github.com/ranon-rat/frensmatria/nodes/src/core"
 	"github.com/ranon-rat/frensmatria/nodes/src/core/channels"
 )
 

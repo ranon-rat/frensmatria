@@ -2,10 +2,18 @@ package connections
 
 import (
 	"fmt"
-
-	"github.com/ranon-rat/frensmatria/core"
+	"math/rand"
 )
 
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+func RandStringRunes(n int) string {
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letterRunes[rand.Intn(len(letterRunes))]
+	}
+	return string(b)
+}
 func HandleEventConns() {
 
 	for {
@@ -14,7 +22,7 @@ func HandleEventConns() {
 		closeChan := connInfo.CloseChan
 		msgChan := connInfo.MsgChan
 		conn := connInfo.Connection
-		ID := core.RandStringRunes(10)
+		ID := RandStringRunes(10)
 
 		fmt.Println("sup we are back")
 		cID := ConnectionID{

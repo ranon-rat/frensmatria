@@ -3,21 +3,52 @@ package main
 // there is not much to modify in this code
 // the relay seems to  be ready
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"net"
 	"os"
-
-	"github.com/ranon-rat/frensmatria/core"
 )
 
-var addresses = make(map[string]string)
-var connections = make(map[string]net.Conn)
+var (
+	addresses   = make(map[string]string)
+	connections = make(map[string]net.Conn)
+)
 
+const (
+	Nothing   = 0
+	ConnectTo = 1
+	Confirm   = 2
+)
+
+type Initial struct {
+	Kind int    `json:"kind"`
+	SDP  string `json:"direction"`
+}
+
+// there
+type IDResponse struct {
+	ID string `json:"id"`
+}
+
+type WantConnect struct {
+	IDNode   string `json:"idNode"`
+	SDPOffer string `json:"SDP"` // if this is empty, that means that i shouldnt send it to the IDNode
+}
+
+func HashSHA256(input string) string {
+	// Crear un hash SHA-256
+	hash := sha256.New()
+	hash.Write([]byte(input))
+	hashBytes := hash.Sum(nil)
+	hashString := hex.EncodeToString(hashBytes)
+	return hashString
+}
 func manageConnections(c net.Conn) {
 
 	defer c.Close()
-	var initialize core.WantConnect
+	var initialize WantConnect
 	reader := json.NewDecoder(c)
 
 	if reader.Decode(&initialize) != nil {
@@ -25,17 +56,17 @@ func manageConnections(c net.Conn) {
 		return
 	}
 
-	ID := core.HashSHA256(initialize.SDPOffer)
+	ID := HashSHA256(initialize.SDPOffer)
 	fmt.Println(ID)
 	defer delete(connections, ID)
 	defer delete(addresses, ID)
 
-	json.NewEncoder(c).Encode(core.IDResponse{ID: ID})
+	json.NewEncoder(c).Encode(IDResponse{ID: ID})
 
 	connections[ID] = c
 	addresses[ID] = initialize.SDPOffer
 	for {
-		var conInterest core.WantConnect
+		var conInterest WantConnect
 
 		if reader.Decode(&conInterest) != nil {
 			break
@@ -44,10 +75,10 @@ func manageConnections(c net.Conn) {
 		if conInterest.SDPOffer == "" {
 			v, e := addresses[conInterest.IDNode]
 			if !e {
-				json.NewEncoder(c).Encode(core.Initial{})
+				json.NewEncoder(c).Encode(Initial{})
 				continue
 			}
-			json.NewEncoder(c).Encode(core.Initial{SDP: v, Kind: core.ConnectTo})
+			json.NewEncoder(c).Encode(Initial{SDP: v, Kind: ConnectTo})
 			continue
 		}
 
@@ -60,10 +91,10 @@ func manageConnections(c net.Conn) {
 		cconn, e := connections[conInterest.IDNode]
 		if !e {
 			// empty
-			json.NewEncoder(c).Encode(core.Initial{})
+			json.NewEncoder(c).Encode(Initial{})
 			continue
 		}
-		json.NewEncoder(cconn).Encode(core.Initial{SDP: conInterest.SDPOffer, Kind: core.Confirm})
+		json.NewEncoder(cconn).Encode(Initial{SDP: conInterest.SDPOffer, Kind: Confirm})
 
 	}
 }
@@ -79,8 +110,7 @@ func main() {
 	}
 	defer server.Close()
 	fmt.Println("starting server")
-	ip, _ := core.GetLocalIP()
-	fmt.Printf("you can connect via %s:%s\n", ip, port)
+	fmt.Printf("you can connect via %s:%s\n", "localhost", port)
 
 	for {
 

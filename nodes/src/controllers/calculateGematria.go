@@ -9,6 +9,7 @@ import (
 	"github.com/ranon-rat/frensmatria/nodes/src/core"
 )
 
+// Template thing
 type GematriaIndexSearch struct {
 	Search       bool
 	NotInt       bool
@@ -25,7 +26,7 @@ func CalculateGematria(w http.ResponseWriter, r *http.Request) {
 		NotInt := err != nil
 		gematria := []core.Gematrias{}
 		if NotInt {
-			gematria = CalculateAllGematrias(input)
+			gematria = core.CalculateAllGematrias(input)
 		}
 		sent(w, indexT, GematriaIndexSearch{
 			Search:       true,
