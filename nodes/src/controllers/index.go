@@ -17,7 +17,7 @@ type GematriaIndexSearch struct {
 	GematriaList []core.Gematrias
 }
 
-func CalculateGematria(w http.ResponseWriter, r *http.Request) {
+func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r.Method)
 	switch r.Method {
 	case "POST":
@@ -43,7 +43,7 @@ func CalculateGematria(w http.ResponseWriter, r *http.Request) {
 			GematriaList: gematria,
 		})
 	default:
-		sent(w, indexT, GematriaIndexSearch{})
+		sent(w, indexT, GematriaIndexSearch{SearchInput: ""})
 	}
 
 }

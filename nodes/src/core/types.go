@@ -2,6 +2,7 @@ package core
 
 type GematriaValues struct {
 	Kind       int
+	ShowName   string
 	ValuesName string
 }
 type GematriaValue struct {
@@ -10,7 +11,8 @@ type GematriaValue struct {
 	Should bool
 }
 type Gematrias struct {
-	Name   string
-	Sum    int
-	Values []GematriaValue
+	Name     string
+	ShowName string
+	Sum      int
+	Values   []GematriaValue
 }

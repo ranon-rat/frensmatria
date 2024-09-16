@@ -22,9 +22,11 @@ var (
 	GematriasVals = map[string]GematriaValues{
 		"simple": {
 			Kind:       sumGematria,
+			ShowName:   "Simple",
 			ValuesName: "simple"},
 		"fractal": {
 			Kind:       fractalGematria,
+			ShowName:   "Fractal",
 			ValuesName: "simple"},
 	}
 	GematriaVals = map[string]map[rune]int{

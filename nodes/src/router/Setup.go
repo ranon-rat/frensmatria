@@ -10,7 +10,7 @@ import (
 func Setup() {
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static", fs)) // basic files
-	http.HandleFunc("/", controllers.CalculateGematria)
+	http.HandleFunc("/", controllers.Index)
 
 	// so this is a setup
 	controllers.SetupTemplate()
