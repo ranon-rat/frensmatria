@@ -1,8 +1,8 @@
 package core
 
 type GematriaValues struct {
-	Kind   int
-	Values map[rune]int
+	Kind       int
+	ValuesName string
 }
 type GematriaValue struct {
 	Rune   string
