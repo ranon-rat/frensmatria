@@ -5,13 +5,14 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+
+	"github.com/ranon-rat/frensmatria/nodes/src/core"
 )
 
 type GematriaIndexSearch struct {
-	Search               bool
-	NotInt               bool
-	SimpleGematriaValues []GematriaValue
-	SimpleGematriaSum    int
+	Search       bool
+	NotInt       bool
+	GematriaList []core.Gematrias
 }
 
 func CalculateGematria(w http.ResponseWriter, r *http.Request) {
@@ -22,16 +23,14 @@ func CalculateGematria(w http.ResponseWriter, r *http.Request) {
 		input := strings.TrimSpace(r.Form.Get("word-input"))
 		_, err := strconv.Atoi(input)
 		NotInt := err != nil
-		var simpleV []GematriaValue
-		simpleGematriaSum := 0
+		gematria := []core.Gematrias{}
 		if NotInt {
-			simpleV, simpleGematriaSum = SimpleGematria(input)
+			gematria = CalculateAllGematrias(input)
 		}
 		sent(w, indexT, GematriaIndexSearch{
-			Search:               true,
-			NotInt:               NotInt,
-			SimpleGematriaValues: simpleV,
-			SimpleGematriaSum:    simpleGematriaSum,
+			Search:       true,
+			NotInt:       NotInt,
+			GematriaList: gematria,
 		})
 	default:
 		sent(w, indexT, GematriaIndexSearch{})

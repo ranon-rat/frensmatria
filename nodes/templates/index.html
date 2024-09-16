@@ -13,11 +13,14 @@
         
             {{if .Search}}
             {{if .NotInt}}
+            {{range .GematriaList}}
             <h2>
-                Simple Gematria
-            </h2>
+                {{.Name}}
+            </h2>    
+         
             <div class="gematria-values">
-                {{range .SimpleGematriaValues}}
+             
+                {{range .Values}}
                 {{if .Should}}
                 <div class="gematria-value">{{.Rune}}<br>{{.Value}}</div>
                 {{else}}
@@ -25,9 +28,12 @@
                 {{end}}
                 {{end}}
                 
-                <div class="gematria-result">= {{.SimpleGematriaSum}}</div>
+                <div class="gematria-result">= {{.Sum}}</div>
 
             </div>
+            {{end}}
+           
+            
             {{end}}
 
             {{template "results"}}
