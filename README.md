@@ -19,7 +19,7 @@ At least for now.
   - [x] synx
   - [x] Alphanumeric Qabbalah 
 - [x] a web interface for interacting and sharing information
-  - [x] calculate gematria(simple)
+  - [x] calculate gematria
   - [ ] look into recent synchs
   - [ ] a simple chat(just in case, this feature will probably be removed)
 - [ ] the db for storing the gematria 

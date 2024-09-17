@@ -1,5 +1,6 @@
 CREATE TABLE Gematrias(
     ID INT PRIMARY KEY,
     Input TEXT,
-    Search TEXT
+    Search TEXT,
+    datePost INT,
 )

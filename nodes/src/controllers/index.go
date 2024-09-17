@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -18,7 +17,6 @@ type GematriaIndexSearch struct {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.Method)
 	switch r.Method {
 	case "POST":
 		if r.ParseForm() != nil {
