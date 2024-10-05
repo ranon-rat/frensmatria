@@ -1,7 +1,7 @@
 :root {
     --bg-color: #030508;
     --text-color: #a0b0c0;
-    --accent-color: #1a3b6d;
+    --accent-color: #5a8edc;
     --secondary-color: #1a1e24;
     --highlight-color: #00a864;
     --border-color: #142848;
@@ -16,7 +16,8 @@ body {
     line-height: 1.6;
 }
 
-h1, h2 {
+h1,
+h2 {
     font-size: 2.5em;
     text-align: center;
     margin: 20px 0;
@@ -33,7 +34,8 @@ h2 {
     padding: 20px;
 }
 
-input, button {
+input,
+button {
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
@@ -54,12 +56,14 @@ button:hover {
     background-color: #234b8a;
 }
 
-#gematria-list, #results-table {
+#gematria-list,
+#results-table {
     list-style-type: none;
     padding: 0;
 }
 
-#gematria-list li, #results-table td {
+#gematria-list li,
+#results-table td {
     margin-bottom: 10px;
     padding: 10px;
     background-color: rgba(26, 59, 109, 0.1);
@@ -79,10 +83,7 @@ button:hover {
     align-items: center;
     margin-bottom: 30px;
 }
-.shouldnt-be-render{
-    margin: 8px;
 
-}
 .gematria-value {
     margin: 8px;
     padding: 8px;
@@ -103,7 +104,8 @@ table {
     margin-top: 30px;
 }
 
-th, td {
+th,
+td {
     border: 1px solid var(--border-color);
     padding: 10px;
     text-align: left;
@@ -146,4 +148,31 @@ nav ul li a:hover {
 
 .section {
     margin-top: 20px;
+}
+
+/* Estilos para la paginación simple */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    color: var(--text-color);
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: 1px solid var(--border-color);
+    margin: 0 4px;
+}
+
+.pagination a.active {
+    background-color: var(--accent-color);
+    color: white;
+    border: 1px solid var(--accent-color);
+}
+
+.pagination a:hover:not(.active) {
+    background-color: var(--secondary-color);
 }

@@ -10,6 +10,7 @@ import (
 var (
 	templates *template.Template
 	indexT    = "index.html"
+	recentT   = "recent.html"
 )
 
 // this is important for loading the templates

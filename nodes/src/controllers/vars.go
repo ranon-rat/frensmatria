@@ -18,3 +18,8 @@ type GematriaIndexSearch struct {
 	OrderTable        []string
 	PagesP            Pagination
 }
+type GeneralGematria struct {
+	GetGematriaSearch [][]string
+	OrderTable        []string
+	PagesP            Pagination
+}

@@ -11,6 +11,7 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 	input := r.URL.Query().Get("word-input")
 	if input == "" {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
 	}
 	format := core.FormatGematria(core.CalculateAllGematrias(input))
 	db.AddGematria(input, format)

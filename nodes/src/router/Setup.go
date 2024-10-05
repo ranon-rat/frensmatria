@@ -12,6 +12,7 @@ func Setup() {
 	http.Handle("/static/", http.StripPrefix("/static", fs)) // basic files
 	http.HandleFunc("/", controllers.Index)
 	http.HandleFunc("/upload", controllers.Upload)
+	http.HandleFunc("/recent", controllers.Recent)
 
 	// so this is a setup
 	controllers.SetupTemplate()

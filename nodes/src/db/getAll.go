@@ -14,12 +14,12 @@ func Count() (quantity int) {
 
 // so this is just for searching the gematria and other stuff
 // in case that the user is interested in a specific kind of gematria it will be setted
-func GematriaByID(offset int) (tableRows [][]string) {
+func GetGematriaPagination(page int) (tableRows [][]string) {
 	query := `SELECT  input, search FROM gematrias ORDER BY datePost DESC LIMIT ? OFFSET ?`
 	db := Connect()
 	defer db.Close()
 
-	rows, _ := db.Query(query, core.LIMIT, offset)
+	rows, _ := db.Query(query, core.LIMIT, page*core.LIMIT)
 	for rows.Next() {
 		var inputString, formatGematria string
 		// so i just need to scan all of this
