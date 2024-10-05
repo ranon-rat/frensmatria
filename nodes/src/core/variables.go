@@ -7,12 +7,16 @@ const (
 	Confirm   = 2
 )
 
+// pagination shit
+var LIMIT = 15
+
 // gematria shit
 const (
 	sumGematria     = 0
 	fractalGematria = 1
 )
 
+// gematria kind of shit
 var (
 
 	/// this is for the table and the output, i want some consistency so this is quite important

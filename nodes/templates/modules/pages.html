@@ -1,0 +1,18 @@
+{{define "paginations"}}
+<!---
+type Pagination struct {
+	CurrentPage int
+	TotalPages  int
+	Pages       []int
+}
+
+-->
+{{if .PagesP.Render}}
+{{range .PagesP}}
+<a href="/?page={{.Pages}}">
+    {{.Pages}}</a>
+{{end}}
+{{end}}
+
+
+{{end}}

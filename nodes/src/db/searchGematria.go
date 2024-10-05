@@ -10,7 +10,7 @@ import (
 func QueryGematriaSearch(db *sql.DB, sum, kind string, offset int) (*sql.Rows, error) {
 	like := fmt.Sprintf("%%%s:%s;%%", kind, sum)
 	query := `SELECT  input, search FROM gematrias WHERE search LIKE ?  ORDER BY datePost DESC LIMIT ? OFFSET ?`
-	return db.Query(query, like, LIMIT, offset)
+	return db.Query(query, like, core.LIMIT, offset)
 }
 
 // this is just for the coutn
@@ -27,7 +27,7 @@ func SearchCount(sum, kind string) (quantity int) {
 func SearchGematriaPaginated(sum, kind string, page int) (tableRows [][]string) {
 	db := Connect()
 	defer db.Close()
-	rows, _ := QueryGematriaSearch(db, sum, kind, page*LIMIT)
+	rows, _ := QueryGematriaSearch(db, sum, kind, page*core.LIMIT)
 	defer rows.Close()
 	for rows.Next() {
 		var inputString, formatGematria string

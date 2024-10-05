@@ -19,7 +19,7 @@ func GematriaByID(offset int) (tableRows [][]string) {
 	db := Connect()
 	defer db.Close()
 
-	rows, _ := db.Query(query, LIMIT, offset)
+	rows, _ := db.Query(query, core.LIMIT, offset)
 	for rows.Next() {
 		var inputString, formatGematria string
 		// so i just need to scan all of this

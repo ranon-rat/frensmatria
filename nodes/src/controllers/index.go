@@ -9,16 +9,6 @@ import (
 	"github.com/ranon-rat/frensmatria/nodes/src/db"
 )
 
-// Template thing
-type GematriaIndexSearch struct {
-	Search            bool
-	NotInt            bool
-	SearchInput       string
-	GematriaList      []core.Gematrias
-	GetGematriaSearch [][]string
-	OrderTable        []string
-}
-
 func Index(w http.ResponseWriter, r *http.Request) {
 
 	input := strings.TrimSpace(r.URL.Query().Get("word-input"))
@@ -35,10 +25,15 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	// this is just for the table
 
 	results := [][]string{}
+	itemsCount := 0
+
 	if !NotInt {
 		results = db.SearchGematriaPaginated(input, core.GematriasOrder[0], 0)
+		itemsCount = db.SearchCount(input, core.GematriasOrder[0])
 	} else {
 		results = db.SearchGematriaPaginated(strconv.Itoa(gematria[0].Sum), gematria[0].Name, 0)
+		itemsCount = db.SearchCount(strconv.Itoa(gematria[0].Sum), gematria[0].Name)
+
 	}
 
 	sent(w, indexT, GematriaIndexSearch{
@@ -48,6 +43,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		GematriaList:      gematria,
 		OrderTable:        core.GematriasOrder,
 		GetGematriaSearch: results,
+		PagesP:            calculatePagination(0, itemsCount),
 	})
 
 }
