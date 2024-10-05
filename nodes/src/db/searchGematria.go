@@ -18,7 +18,6 @@ func SearchCount(sum, kind string) (quantity int) {
 	db := Connect()
 	defer db.Close()
 	like := fmt.Sprintf("%%%s:%s;%%", kind, sum)
-	fmt.Println(like)
 	db.QueryRow(`SELECT COUNT(*) FROM gematrias WHERE search LIKE ?1`, like).Scan(&quantity)
 	return
 }

@@ -13,7 +13,9 @@ func Recent(w http.ResponseWriter, r *http.Request) {
 	if page == 0 {
 		page = 1
 	}
+
 	sent(w, recentT, GeneralGematria{
+		Render:            false,
 		GetGematriaSearch: db.GetGematriaPagination(page - 1),
 		PagesP:            calculatePagination(page, db.Count()),
 		OrderTable:        core.GematriasOrder,

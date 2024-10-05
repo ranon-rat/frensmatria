@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -14,6 +13,10 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	page, _ := strconv.Atoi(r.URL.Query().Get("page"))
 	if page == 0 {
 		page = 1
+	}
+	kind := r.URL.Query().Get("kind")
+	if _, e := core.GematriasVals[kind]; !e {
+		kind = core.GematriasOrder[0]
 	}
 	input := strings.TrimSpace(r.URL.Query().Get("word-input"))
 	if input == "" {
@@ -32,15 +35,15 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	itemsCount := 0
 
 	if !NotInt {
-		results = db.SearchGematriaPaginated(input, core.GematriasOrder[0], page-1)
-		itemsCount = db.SearchCount(input, core.GematriasOrder[0])
+		results = db.SearchGematriaPaginated(input, kind, page-1)
+		itemsCount = db.SearchCount(input, kind)
 	} else {
-		results = db.SearchGematriaPaginated(strconv.Itoa(gematria[0].Sum), gematria[0].Name, page-1)
-		itemsCount = db.SearchCount(strconv.Itoa(gematria[0].Sum), gematria[0].Name)
+		results = db.SearchGematriaPaginated(strconv.Itoa(gematria[0].Sum), kind, page-1)
+		itemsCount = db.SearchCount(strconv.Itoa(gematria[0].Sum), kind)
 
 	}
-	fmt.Println(calculatePagination(page, itemsCount), itemsCount, db.SearchCount(input, core.GematriasOrder[0]))
 	sent(w, indexT, GematriaIndexSearch{
+		Render:            true,
 		Search:            true,
 		NotInt:            NotInt,
 		SearchInput:       input,

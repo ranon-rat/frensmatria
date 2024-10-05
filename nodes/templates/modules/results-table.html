@@ -4,8 +4,21 @@
     <tr>
 
         <th>Input</th>
-        {{range .OrderTable}}
-        <th><a href="?kind={{.}}" onclick="redirectWithQuery(event)">{{.}}</a></th>
+        {{if .Render}}
+
+        {{range $g:= .OrderTable}}
+        <th>
+            <a href="?kind={{$g}}" onclick="redirectWithQuery(event)">{{$g}}</a>
+        </th>
+        {{end}}
+
+        {{else}}
+        {{range $g:= .OrderTable}}
+        <th>
+            {{$g}}
+        </th>
+
+        {{end}}
         {{end}}
 
     </tr>

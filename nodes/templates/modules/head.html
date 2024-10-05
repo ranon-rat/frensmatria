@@ -8,18 +8,24 @@
     <script>
         // Función para redirigir al hacer clic en el enlace
         function redirectWithQuery(event) {
-            // Prevenir el comportamiento por defecto del enlace
             event.preventDefault();
 
-            // Obtener la query string actual (parte después del '?')
-            const queryString = window.location.search;
+            const currentQueryString = window.location.search;
 
-            // Obtener la URL de destino desde el atributo href del enlace
-            const newPage = event.target.getAttribute('href');
+            const newQueryString = event.target.getAttribute('href');
 
-            // Redirigir a la nueva página con la query string conservada
-            window.location.href = newPage + queryString;
+            const currentParams = new URLSearchParams(currentQueryString);
+
+            const newParams = new URLSearchParams(newQueryString);
+
+            newParams.forEach((value, key) => {
+                currentParams.set(key, value); // Esto reemplaza o añade el parámetro
+            });
+
+            // Redirigir a la misma página con la nueva query string
+            window.location.href = window.location.pathname + '?' + currentParams.toString();
         }
+
     </script>
 </head>
 {{end}}

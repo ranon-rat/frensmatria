@@ -1,8 +1,6 @@
 package db
 
-import (
-	"github.com/ranon-rat/frensmatria/nodes/src/core"
-)
+import "github.com/ranon-rat/frensmatria/nodes/src/core"
 
 // this is just for the coutn
 func Count() (quantity int) {

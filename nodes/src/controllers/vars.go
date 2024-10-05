@@ -20,8 +20,10 @@ type GematriaIndexSearch struct {
 	GetGematriaSearch [][]string
 	OrderTable        []string
 	PagesP            Pagination
+	Render            bool
 }
 type GeneralGematria struct {
+	Render            bool
 	GetGematriaSearch [][]string
 	OrderTable        []string
 	PagesP            Pagination
