@@ -1,26 +1,17 @@
 {{define "show-if-search"}}
     {{if .Search}}
-            <!--
-en caso de que no sea un numero
-            -->
+         
                 {{if .NotInt}}
-            <!--
-                    esto solo va a mostrar los resultados
-                -->
+          
                     <h2>
                         results for: {{.SearchInput}}
                     </h2>
                     {{template "gematria-results" .GematriaList}}
                 {{end}}
-            <!--
-                esto solo va a mostrar los resultados
-            -->
+        
                 {{template "results" .}}
             {{end}}
-            <!--
-                this little button is just for getting searching results in case i am trying to find something new
-        
-            -->
+           
             {{if .NotInt}}
                 {{template "upload" .}}
             {{end}}

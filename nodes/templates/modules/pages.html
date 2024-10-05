@@ -1,12 +1,5 @@
 {{define "paginations"}}
-<!---
-type Pagination struct {
-	CurrentPage int
-	TotalPages  int
-	Pages       []int
-}
 
--->
 {{if .PagesP.Render}}
 <div class="pagination">
     {{range $page := .PagesP.Pages}}
