@@ -10,9 +10,15 @@ type Pagination struct {
 {{if .PagesP.Render}}
 <div class="pagination">
     {{range $page := .PagesP.Pages}}
-    <a href="?page={{$page}}">
-        {{$page}}
+    {{if $page.Current}}
+    <a href="?page={{$page.Page}}" class="active">
+        {{$page.Page}}
     </a>
+    {{else}}
+    <a href="?page={{$page.Page}}">
+        {{$page.Page}}
+    </a>
+    {{end}}
     {{end}}
 </div>
 

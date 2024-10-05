@@ -30,9 +30,12 @@ func calculatePagination(currentPage, totalItems int) Pagination {
 		startPage = max(1, totalPages-MaxVisiblePages+1)
 	}
 
-	pages := make([]int, 0)
+	pages := make([]PagesElement, 0)
 	for i := startPage; i <= endPage; i++ {
-		pages = append(pages, i)
+		pages = append(pages, PagesElement{
+			Current: i == currentPage,
+			Page:    i,
+		})
 	}
 
 	return Pagination{

@@ -8,7 +8,7 @@ const (
 )
 
 // pagination shit
-var LIMIT = 15
+const LIMIT = 10
 
 // gematria shit
 const (

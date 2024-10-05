@@ -8,7 +8,7 @@ import (
 func Count() (quantity int) {
 	db := Connect()
 	defer db.Close()
-	db.QueryRow(`SELECT COUNT(*) FROM gematrias  ORDER BY datePost DESC`).Scan(&quantity)
+	db.QueryRow(`SELECT COUNT(*) FROM gematrias `).Scan(&quantity)
 	return
 }
 

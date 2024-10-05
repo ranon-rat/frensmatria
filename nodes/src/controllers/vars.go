@@ -6,9 +6,12 @@ type Pagination struct {
 	CurrentPage int
 	TotalPages  int
 	Render      bool
-	Pages       []int
+	Pages       []PagesElement
 }
-
+type PagesElement struct {
+	Page    int
+	Current bool
+}
 type GematriaIndexSearch struct {
 	Search            bool
 	NotInt            bool
