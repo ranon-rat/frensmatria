@@ -7,21 +7,10 @@ import (
 	"github.com/ranon-rat/frensmatria/nodes/src/core"
 )
 
-func QueryIDGematriaSearch(db *sql.DB, sum, kind string, id int) (*sql.Rows, error) {
+func QueryGematriaSearch(db *sql.DB, sum, kind string, offset int) (*sql.Rows, error) {
 	like := fmt.Sprintf("%%%s:%s;%%", kind, sum)
-
-	var query string
-	var args []interface{}
-
-	if id != 0 {
-		query = `SELECT id, input, search FROM gematrias WHERE search LIKE ? AND id <= ? ORDER BY datePost DESC LIMIT ?`
-		args = []interface{}{like, id, LIMIT}
-	} else {
-		query = `SELECT id, input, search FROM gematrias WHERE search LIKE ? ORDER BY datePost DESC LIMIT ?`
-		args = []interface{}{like, LIMIT}
-	}
-
-	return db.Query(query, args...)
+	query := `SELECT  input, search FROM gematrias WHERE search LIKE ?  ORDER BY datePost DESC LIMIT ? OFFSET ?`
+	return db.Query(query, like, LIMIT, offset)
 }
 
 // this is just for the coutn
@@ -35,17 +24,14 @@ func SearchCount(sum, kind string) (quantity int) {
 
 // so this is just for searching the gematria and other stuff
 // in case that the user is interested in a specific kind of gematria it will be setted
-func SearchGematriaByID(sum, kind string, id int) (tableRows [][]string, lastID int) {
+func SearchGematriaPaginated(sum, kind string, offset int) (tableRows [][]string) {
 	db := Connect()
 	defer db.Close()
-	rows, _ := QueryIDGematriaSearch(db, sum, kind, id)
-
+	rows, _ := QueryGematriaSearch(db, sum, kind, offset)
 	defer rows.Close()
-
 	for rows.Next() {
 		var inputString, formatGematria string
-		rows.Scan(&lastID, &inputString, &formatGematria)
-
+		rows.Scan(&inputString, &formatGematria)
 		tableRows = append(tableRows, append([]string{inputString}, core.DecodeFGematrias(formatGematria)...))
 	}
 

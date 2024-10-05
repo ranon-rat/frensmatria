@@ -8,8 +8,8 @@ import (
 
 	"github.com/ranon-rat/frensmatria/nodes/src/SDPConn"
 	"github.com/ranon-rat/frensmatria/nodes/src/connections"
-	"github.com/ranon-rat/frensmatria/nodes/src/db"
 	"github.com/ranon-rat/frensmatria/nodes/src/relayConn"
+	"github.com/ranon-rat/frensmatria/nodes/src/router"
 )
 
 /*
@@ -42,8 +42,11 @@ func SimpleChatUseWebRTC() {
 	}()
 	select {}
 }
+func Setup() {
+	router.Setup()
+}
 func main() {
 	fmt.Println("hello world")
-	fmt.Println(db.GematriaByID(0))
-	//router.Setup()
+	//fmt.Println(db.GematriaByID(0))
+	router.Setup()
 }
