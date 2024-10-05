@@ -5,5 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frensmatria</title>
     <link rel="stylesheet" href="/static/style.css">
+    <script>
+        // Función para redirigir al hacer clic en el enlace
+        function redirectWithQuery(event) {
+            // Prevenir el comportamiento por defecto del enlace
+            event.preventDefault();
+
+            // Obtener la query string actual (parte después del '?')
+            const queryString = window.location.search;
+
+            // Obtener la URL de destino desde el atributo href del enlace
+            const newPage = event.target.getAttribute('href');
+
+            // Redirigir a la nueva página con la query string conservada
+            window.location.href = newPage + queryString;
+        }
+    </script>
 </head>
 {{end}}

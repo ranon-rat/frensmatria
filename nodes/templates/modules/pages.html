@@ -11,11 +11,11 @@ type Pagination struct {
 <div class="pagination">
     {{range $page := .PagesP.Pages}}
     {{if $page.Current}}
-    <a href="?page={{$page.Page}}" class="active">
+    <a href="?page={{$page.Page}}" onclick="redirectWithQuery(event)" class="active">
         {{$page.Page}}
     </a>
     {{else}}
-    <a href="?page={{$page.Page}}">
+    <a href="?page={{$page.Page}}" onclick="redirectWithQuery(event)">
         {{$page.Page}}
     </a>
     {{end}}

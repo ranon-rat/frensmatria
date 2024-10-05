@@ -5,7 +5,7 @@
 
         <th>Input</th>
         {{range .OrderTable}}
-        <th>{{.}}</th>
+        <th><a href="?kind={{.}}" onclick="redirectWithQuery(event)">{{.}}</a></th>
         {{end}}
 
     </tr>
