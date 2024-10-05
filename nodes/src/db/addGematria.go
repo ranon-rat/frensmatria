@@ -14,7 +14,5 @@ func AddGematria(input, format string) (err error) {
 	if err != nil {
 		return
 	}
-	// no deberia de ser muy complicado
-	// ahora voy a intentar correr una cosa para hacer el setup
 	return
 }

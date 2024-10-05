@@ -13,7 +13,7 @@ Its quite important specially for making bigger things
 */
 func ConnectToNodes() {
 	for {
-		// con esto ya puedo mantener mis conexiones y otras cosas
+
 		answerSDP := <-channels.SDPChan
 		fmt.Println("new connection")
 		switch answerSDP.Kind {
