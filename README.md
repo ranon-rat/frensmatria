@@ -1,29 +1,31 @@
-# frensmatria
-its just a simple p2p network for studying and adding multiple information.
+# Frensmatria
 
-Its not finished, for now we have to actually implement many of this things, possibly the relay will have to change.
-![alt text](images/lookup.png)
+Welcome to **Frensmatria** – an innovative P2P network designed for exploring and expanding gematria knowledge!
 
+Currently, I'am in the development phase. We have many exciting features to implement, and some aspects of the relay may undergo changes. 
 
-## how to test it
-just run the file `nodes/main.go`, at this moment i am working on building the website and the database so, for now you cant test anything related to the p2p stuff.
-At least for now.
+![Gematria Lookup](images/lookup.png)
+
+## How to Test It
+
+To get started, simply run the file `nodes/main.go`. At this stage, I'm focusing on building the website and database, so P2P functionalities aren't ready for testing yet.
+
 ## TODO
 
-
-- [x] communication between nodes
-- [x] a relay for sharing the SDP descriptor between nodes
-- [x] a way of managing multiple connections
-- [x] an event handler
-- [x] calculating the gematria
-  - [x] synx
+- [x] **Communication Between Nodes**
+- [x] **Relay for Sharing SDP Descriptor** 
+- [x] **Management of Multiple Connections**
+- [x] **Event Handler**
+- [x] **Gematria Calculations**
+  - [x] Synx
   - [x] Alphanumeric Qabbalah 
-- [x] a web interface for interacting and sharing information
-  - [x] calculate gematria
-  - [x] look into recent synchs
-  - [ ] a simple chat(just in case, this feature will probably be removed)
-- [x] the db for storing the gematria 
-- [ ] share between nodes information(events and other stuff)
-- [ ] passwords and other stuff for connecting with other nodes
-- [ ] a seed node for making it easier to handle
+- [x] **Web Interface for Interaction and Information Sharing**
+  - [x] Calculate Gematria
+  - [x] View Recent Synchs
+  - [ ] Simple Chat (Tentative; this feature may be removed)
+- [x] **Database for Gematria Storage**
+- [ ] **Information Sharing Between Nodes** (events and more)
+- [ ] **Authentication** (passwords and other connection methods)
+- [ ] **Seed Node** for easier management
+
 
