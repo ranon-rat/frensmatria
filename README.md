@@ -2,7 +2,7 @@
 
 Welcome to **Frensmatria** – an innovative P2P network designed for exploring and expanding gematria knowledge!
 
-Currently, I'am in the development phase. We have many exciting features to implement, and some aspects of the relay may undergo changes. 
+Currently, I'am in the development phase. I have many exciting features to implement, and some aspects of the relay may undergo changes. 
 
 ![Gematria Lookup](images/lookup.png)
 
