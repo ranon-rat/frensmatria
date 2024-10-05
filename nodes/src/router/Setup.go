@@ -11,6 +11,7 @@ func Setup() {
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static", fs)) // basic files
 	http.HandleFunc("/", controllers.Index)
+	http.HandleFunc("/upload", controllers.Upload)
 
 	// so this is a setup
 	controllers.SetupTemplate()

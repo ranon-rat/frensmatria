@@ -1,11 +1,16 @@
 package core
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func CalculateAllGematrias(input string) []Gematrias {
 	out := []Gematrias{}
-	for n, g := range GematriasVals {
+	// so this will follow a range
+	for _, n := range GematriasOrder {
 
+		g := GematriasVals[n]
 		values := GematriaVals[g.ValuesName]
 		switch g.Kind {
 		case sumGematria:
@@ -33,6 +38,35 @@ func CalculateAllGematrias(input string) []Gematrias {
 
 	return out
 }
+
+// now lets add more stuff here
+// this will encode and make a format for the gematrias
+// this is for storing the values and other stuff, its important to keep it
+func FormatGematria(gematrias []Gematrias) (out string) {
+
+	for _, v := range gematrias {
+		out += fmt.Sprintf("%s:%d;", v.Name, v.Sum)
+	}
+	return
+}
+
+// this will decode the formated gematrias
+func DecodeFGematrias(encoded string) (out []string) {
+	formatedGematrias := strings.Split(encoded, ";")
+	// why i am following the list of gematriaorder when this is not really required?
+	// well i dont want to scan 2 variables kek
+	for i, v := range GematriasOrder {
+
+		sum := ""
+		fmt.Sscanf(formatedGematrias[i], v+":%s", &sum)
+		out = append(out, sum)
+
+	}
+	return
+}
+
+// this is just generalized gematria calculations
+
 func GeneralFractalGematriaCalculator(input string, gematriaValues map[rune]int) ([]GematriaValue, int) {
 	values := []GematriaValue{}
 	s := 0

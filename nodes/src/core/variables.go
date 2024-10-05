@@ -15,10 +15,12 @@ const (
 
 var (
 
-	// con esto podemos dejar cuales son las que existen, so thats good enough for me and for everyone else
-	// rn i have to think on how the fuck iam building the db
-	// i could be using a csv, a json format or idk
-	// maybe using a simple uhh text divided by commas?
+	/// this is for the table and the output, i want some consistency so this is quite important
+	GematriasOrder = []string{
+		"AQ",
+		"synx",
+	}
+	// this is just generalized
 	GematriasVals = map[string]GematriaValues{
 
 		"AQ": {
@@ -31,8 +33,8 @@ var (
 			ShowName:   "Synx",
 			ValuesName: "synx"},
 	}
+	// they dont really need to have some order
 	GematriaVals = map[string]map[rune]int{
-
 		"synx": {
 			'0': 1, '1': 2, '2': 3, '3': 4, '4': 5, '5': 6, '6': 7, '7': 9, '8': 10, '9': 12,
 			'a': 14, 'b': 15, 'c': 18, 'd': 20, 'e': 21, 'f': 28, 'g': 30, 'h': 35,

@@ -2,7 +2,11 @@
 
 
 <div id="upload-status">
-    <button onclick="uploadResults()">Upload to XenoNet</button>
+    <form action="/upload">
+        <input type="hidden" name="word-input" value={{.SearchInput}}>
 
+        <button onclick="uploadResults()">Upload to the network</button>
+
+    </form>
 </div>
 {{end}}

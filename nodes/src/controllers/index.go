@@ -14,34 +14,28 @@ type GematriaIndexSearch struct {
 	NotInt       bool
 	SearchInput  string
 	GematriaList []core.Gematrias
+	OrderTable   []string
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	switch r.Method {
-	case "POST":
-		if r.ParseForm() != nil {
-			sent(w, indexT, GematriaIndexSearch{})
-			return
-		}
-		input := strings.TrimSpace(r.Form.Get("word-input"))
-		if input == "" {
-			sent(w, indexT, GematriaIndexSearch{})
-			return
-		}
-		_, err := strconv.Atoi(input)
-		NotInt := err != nil
-		gematria := []core.Gematrias{}
-		if NotInt {
-			gematria = core.CalculateAllGematrias(input)
-		}
-		sent(w, indexT, GematriaIndexSearch{
-			Search:       true,
-			NotInt:       NotInt,
-			SearchInput:  input,
-			GematriaList: gematria,
-		})
-	default:
-		sent(w, indexT, GematriaIndexSearch{SearchInput: ""})
+
+	input := strings.TrimSpace(r.URL.Query().Get("word-input"))
+	if input == "" {
+		sent(w, indexT, GematriaIndexSearch{})
+		return
 	}
+	_, err := strconv.Atoi(input)
+	NotInt := err != nil
+	gematria := []core.Gematrias{}
+	if NotInt {
+		gematria = core.CalculateAllGematrias(input)
+	}
+	sent(w, indexT, GematriaIndexSearch{
+		Search:       true,
+		NotInt:       NotInt,
+		SearchInput:  input,
+		GematriaList: gematria,
+		OrderTable:   core.GematriasOrder,
+	})
 
 }

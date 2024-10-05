@@ -1,6 +1,6 @@
-CREATE TABLE Gematrias(
-    ID INT PRIMARY KEY,
-    Input TEXT,
-    Search TEXT,
-    datePost INT,
-)
+CREATE TABLE IF NOT EXISTS Gematrias (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Input TEXT UNIQUE NOT NULL,
+    Search TEXT NOT NULL,
+    datePost INTEGER NOT NULL
+);
