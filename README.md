@@ -20,10 +20,10 @@ At least for now.
   - [x] Alphanumeric Qabbalah 
 - [x] a web interface for interacting and sharing information
   - [x] calculate gematria
-  - [ ] look into recent synchs
+  - [x] look into recent synchs
   - [ ] a simple chat(just in case, this feature will probably be removed)
-- [ ] the db for storing the gematria 
+- [x] the db for storing the gematria 
+- [ ] share between nodes information(events and other stuff)
 - [ ] passwords and other stuff for connecting with other nodes
 - [ ] a seed node for making it easier to handle
-- [ ] and nothing else
 
