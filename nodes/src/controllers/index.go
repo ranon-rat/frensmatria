@@ -32,6 +32,8 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	if NotInt {
 		gematria = core.CalculateAllGematrias(input)
 	}
+	// this is just for the table
+
 	results := [][]string{}
 	if !NotInt {
 		results = db.SearchGematriaPaginated(input, core.GematriasOrder[0], 0)

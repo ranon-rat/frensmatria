@@ -24,10 +24,10 @@ func SearchCount(sum, kind string) (quantity int) {
 
 // so this is just for searching the gematria and other stuff
 // in case that the user is interested in a specific kind of gematria it will be setted
-func SearchGematriaPaginated(sum, kind string, offset int) (tableRows [][]string) {
+func SearchGematriaPaginated(sum, kind string, page int) (tableRows [][]string) {
 	db := Connect()
 	defer db.Close()
-	rows, _ := QueryGematriaSearch(db, sum, kind, offset)
+	rows, _ := QueryGematriaSearch(db, sum, kind, page*LIMIT)
 	defer rows.Close()
 	for rows.Next() {
 		var inputString, formatGematria string
