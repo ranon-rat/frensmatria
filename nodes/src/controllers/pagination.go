@@ -43,6 +43,8 @@ func calculatePagination(currentPage, totalItems int) Pagination {
 		TotalPages:  totalPages,
 		Pages:       pages,
 		Render:      len(pages) != 0,
+		Back:        max(currentPage-1, 1),
+		Next:        min(currentPage+1, endPage),
 	}
 }
 

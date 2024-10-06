@@ -5,6 +5,8 @@ import "github.com/ranon-rat/frensmatria/nodes/src/core"
 type Pagination struct {
 	CurrentPage int
 	TotalPages  int
+	Back        int
+	Next        int
 	Render      bool
 	Pages       []PagesElement
 }

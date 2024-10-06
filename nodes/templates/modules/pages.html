@@ -2,6 +2,9 @@
 
 {{if .PagesP.Render}}
 <div class="pagination">
+    <a href="?page={{.PagesP.Back}}" onclick="redirectWithQuery(event)">
+        &lt;
+    </a>
     {{range $page := .PagesP.Pages}}
     {{if $page.Current}}
     <a href="?page={{$page.Page}}" onclick="redirectWithQuery(event)" class="active">
@@ -13,6 +16,10 @@
     </a>
     {{end}}
     {{end}}
+
+    <a href="?page={{.PagesP.Next}}" onclick="redirectWithQuery(event)">
+        &gt;
+    </a>
 </div>
 
 {{end}}
