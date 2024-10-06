@@ -11,9 +11,8 @@ import (
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	page, _ := strconv.Atoi(r.URL.Query().Get("page"))
-	if page == 0 {
-		page = 1
-	}
+	page = max(page, 1)
+
 	kind := r.URL.Query().Get("kind")
 	if _, e := core.GematriasVals[kind]; !e {
 		kind = core.GematriasOrder[0]
