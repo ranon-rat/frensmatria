@@ -31,15 +31,23 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	}
 	// this is just for the table
 
-	results := [][]string{}
+	var results [][]string
 	itemsCount := 0
 
 	if !NotInt {
 		results = db.SearchGematriaPaginated(input, kind, page-1)
 		itemsCount = db.SearchCount(input, kind)
 	} else {
-		results = db.SearchGematriaPaginated(strconv.Itoa(gematria[0].Sum), kind, page-1)
-		itemsCount = db.SearchCount(strconv.Itoa(gematria[0].Sum), kind)
+		k := core.Gematrias{}
+		for i := 0; i < len(gematria); i++ {
+			if gematria[i].Name == kind {
+				k = gematria[i]
+				break
+			}
+
+		}
+		results = db.SearchGematriaPaginated(strconv.Itoa(k.Sum), kind, page-1)
+		itemsCount = db.SearchCount(strconv.Itoa(k.Sum), kind)
 
 	}
 	sent(w, indexT, GematriaIndexSearch{
@@ -50,8 +58,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		GematriaList:      gematria,
 		OrderTable:        core.GematriasOrder,
 		GetGematriaSearch: results,
-
-		PagesP: calculatePagination(page, itemsCount),
+		PagesP:            calculatePagination(page, itemsCount),
 	})
 
 }
