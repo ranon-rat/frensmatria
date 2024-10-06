@@ -4,6 +4,7 @@ type GematriaValues struct {
 	Kind       int
 	ShowName   string
 	ValuesName string
+	Upper      bool
 }
 type GematriaValue struct {
 	Rune   string

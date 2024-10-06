@@ -11,10 +11,14 @@ func CalculateAllGematrias(input string) []Gematrias {
 	for _, n := range GematriasOrder {
 
 		g := GematriasVals[n]
+		i := input
+		if !g.Upper {
+			i = strings.ToLower(i)
+		}
 		values := GematriaVals[g.ValuesName]
 		switch g.Kind {
 		case sumGematria:
-			values, sum := GeneralAdditionGematriaCalculator(input+" ", values)
+			values, sum := GeneralAdditionGematriaCalculator(i+" ", values)
 			out = append(out, Gematrias{
 				Name:     n,
 				Sum:      sum,
@@ -22,7 +26,7 @@ func CalculateAllGematrias(input string) []Gematrias {
 				Values:   values,
 			})
 		case fractalGematria:
-			values, sum := GeneralFractalGematriaCalculator(input+" ", values)
+			values, sum := GeneralFractalGematriaCalculator(i+" ", values)
 			out = append(out, Gematrias{
 				Name:     n,
 				ShowName: g.ShowName,

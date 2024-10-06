@@ -31,11 +31,15 @@ var (
 			Kind:       sumGematria,
 			ShowName:   "Alpha numeric Qabbalah",
 			ValuesName: "AQ",
+			Upper:      false,
 		},
 		"synx": {
 			Kind:       sumGematria,
 			ShowName:   "Synx",
-			ValuesName: "synx"},
+			ValuesName: "synx",
+
+			Upper: false,
+		},
 	}
 	// they dont really need to have some order
 	GematriaVals = map[string]map[rune]int{
