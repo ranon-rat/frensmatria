@@ -7,5 +7,7 @@ import (
 )
 
 func OnOpen(conn *webrtc.DataChannel) {
-	conn.SendText(fmt.Sprintf("get %d", CurrentDate))
+	if ComparingQ {
+		conn.SendText(fmt.Sprintf("get %d", CurrentDate))
+	}
 }
