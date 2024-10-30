@@ -59,6 +59,7 @@ func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, i int) {
 			compare.Compare(ComparingMap, CurrentDate)
 			ComparingMap = []map[string]int{}
 			ComparingQ = false
+			ComparingQs = []bool{}
 		}
 
 	default:
