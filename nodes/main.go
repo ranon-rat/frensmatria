@@ -14,7 +14,7 @@ import (
 so i think that i will be avoiding to add anything quite interesting here
 */
 
-func SimpleChatUseWebRTC() {
+func Setup() {
 	// some simple shit for using it later
 	relayAddrs := flag.String("relay", "localhost:8080", "just connect to a relay so we can hole punch")
 	idNode := flag.String("node", "", "is just the id that the relay generats, use it to connect with someone else")
@@ -26,17 +26,17 @@ func SimpleChatUseWebRTC() {
 
 	// this handles the events
 	// okay so this seems to be quite simple
+	connections.SetDate()
 	go connections.HandleEventConns()
 	go connections.SendMessages()
 
 	fmt.Println("share this ID:", relayConn.GiveID())
 
 }
-func Setup() {
-	router.Setup()
-}
+
 func main() {
 	fmt.Println("hello world")
 	//fmt.Println(db.GematriaByID(0))
+	go Setup()
 	router.Setup()
 }

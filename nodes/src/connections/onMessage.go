@@ -31,6 +31,7 @@ func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, i int) {
 	case "get":
 		date, _ := strconv.Atoi(information[1])
 		db.GetAllGematria(conn, date)
+
 	case "new":
 		g := core.Base64_2GematriaSharing(information[1])
 		log.Println("New", g.Content)
@@ -40,15 +41,25 @@ func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, i int) {
 			channels.ConnectionComm <- fmt.Sprintf("new %s", core.GematriaSharing2Base64(g))
 		}
 	case "compare":
+		if !ComparingQs[i] {
+			return
+		}
 		g := core.Base64_2GematriaSharing(information[1])
 		log.Println("Comparing", g.Content)
-		Comparing[i][g.Content] = g.Date
+		ComparingMap[i][g.Content] = g.Date
 
 	case "end":
 
 		// not finished yet, i still need to modify some other stuff for improving the system
-
-		compare.Compare(Comparing, 0)
+		if ComparingQs[i] {
+			ComparingNodes--
+			ComparingQs[i] = false
+		}
+		if ComparingNodes == 0 {
+			compare.Compare(ComparingMap, CurrentDate)
+			ComparingMap = []map[string]int{}
+			ComparingQ = false
+		}
 
 	default:
 		return
