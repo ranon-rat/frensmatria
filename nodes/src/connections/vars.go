@@ -7,10 +7,7 @@ type ConnectionInfo struct {
 	Connection *webrtc.DataChannel
 	MsgChan    chan webrtc.DataChannelMessage
 }
-type Message struct {
-	ID      string
-	Content string
-}
+
 type ConnectionID struct {
 	Connection *webrtc.DataChannel
 	ID         string
@@ -19,5 +16,5 @@ type ConnectionID struct {
 var (
 	ConnInfoChan = make(chan ConnectionInfo)
 	Conns        = make(map[ConnectionID]bool)
-	MsgChan      = make(chan Message)
+	Comparing    = []map[string]int{}
 )

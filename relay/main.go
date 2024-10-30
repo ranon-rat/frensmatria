@@ -3,12 +3,12 @@ package main
 // there is not much to modify in this code
 // the relay seems to  be ready
 import (
-	"crypto/sha256"
-	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"net"
 	"os"
+
+	"github.com/ranon-rat/frensmatria/common"
 )
 
 var (
@@ -16,39 +16,10 @@ var (
 	connections = make(map[string]net.Conn)
 )
 
-const (
-	Nothing   = 0
-	ConnectTo = 1
-	Confirm   = 2
-)
-
-type Initial struct {
-	Kind int    `json:"kind"`
-	SDP  string `json:"direction"`
-}
-
-// there
-type IDResponse struct {
-	ID string `json:"id"`
-}
-
-type WantConnect struct {
-	IDNode   string `json:"idNode"`
-	SDPOffer string `json:"SDP"` // if this is empty, that means that i shouldnt send it to the IDNode
-}
-
-func HashSHA256(input string) string {
-	// Crear un hash SHA-256
-	hash := sha256.New()
-	hash.Write([]byte(input))
-	hashBytes := hash.Sum(nil)
-	hashString := hex.EncodeToString(hashBytes)
-	return hashString
-}
 func manageConnections(c net.Conn) {
 
 	defer c.Close()
-	var initialize WantConnect
+	var initialize common.WantConnect
 	reader := json.NewDecoder(c)
 
 	if reader.Decode(&initialize) != nil {
@@ -56,17 +27,17 @@ func manageConnections(c net.Conn) {
 		return
 	}
 
-	ID := HashSHA256(initialize.SDPOffer)
+	ID := common.HashSHA256(initialize.SDPOffer)
 	fmt.Println(ID)
 	defer delete(connections, ID)
 	defer delete(addresses, ID)
 
-	json.NewEncoder(c).Encode(IDResponse{ID: ID})
+	json.NewEncoder(c).Encode(common.IDResponse{ID: ID})
 
 	connections[ID] = c
 	addresses[ID] = initialize.SDPOffer
 	for {
-		var conInterest WantConnect
+		var conInterest common.WantConnect
 
 		if reader.Decode(&conInterest) != nil {
 			break
@@ -75,10 +46,10 @@ func manageConnections(c net.Conn) {
 		if conInterest.SDPOffer == "" {
 			v, e := addresses[conInterest.IDNode]
 			if !e {
-				json.NewEncoder(c).Encode(Initial{})
+				json.NewEncoder(c).Encode(common.Initial{})
 				continue
 			}
-			json.NewEncoder(c).Encode(Initial{SDP: v, Kind: ConnectTo})
+			json.NewEncoder(c).Encode(common.Initial{SDP: v, Kind: common.ConnectTo})
 			continue
 		}
 
@@ -91,10 +62,10 @@ func manageConnections(c net.Conn) {
 		cconn, e := connections[conInterest.IDNode]
 		if !e {
 			// empty
-			json.NewEncoder(c).Encode(Initial{})
+			json.NewEncoder(c).Encode(common.Initial{})
 			continue
 		}
-		json.NewEncoder(cconn).Encode(Initial{SDP: conInterest.SDPOffer, Kind: Confirm})
+		json.NewEncoder(cconn).Encode(common.Initial{SDP: conInterest.SDPOffer, Kind: common.Confirm})
 
 	}
 }

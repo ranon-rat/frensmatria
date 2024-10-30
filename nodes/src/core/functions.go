@@ -1,9 +1,22 @@
 package core
 
 import (
+	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"strings"
 )
+
+func GematriaSharing2Base64(g GematriaSharing) string {
+	b, _ := json.Marshal(g)
+	return base64.RawStdEncoding.EncodeToString(b)
+}
+func Base64_2GematriaSharing(b string) GematriaSharing {
+	var g GematriaSharing
+	d, _ := base64.RawStdEncoding.DecodeString(b)
+	json.Unmarshal(d, &g)
+	return g
+}
 
 func CalculateAllGematrias(input string) []Gematrias {
 	out := []Gematrias{}

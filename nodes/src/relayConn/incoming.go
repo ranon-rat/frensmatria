@@ -3,6 +3,7 @@ package relayConn
 import (
 	"encoding/json"
 
+	"github.com/ranon-rat/frensmatria/common"
 	"github.com/ranon-rat/frensmatria/nodes/src/core/channels"
 )
 
@@ -12,7 +13,7 @@ with this we can handle the relay answers
 func RelayNewConns() {
 	defer rConn.Close()
 	if nID == "" {
-		var res channels.IDResponse
+		var res common.IDResponse
 		// i continue iin my journey
 		if rReader.Decode(&res) != nil {
 			panic("relay problems")
@@ -20,7 +21,7 @@ func RelayNewConns() {
 		IDchan <- res.ID
 	}
 	for {
-		var body channels.Initial
+		var body common.Initial
 		if rReader.Decode(&body) != nil {
 			break
 		}
@@ -40,7 +41,7 @@ func ActualizeSDP() {
 
 	for {
 		SDP := <-channels.SDPChanInivitation
-		json.NewEncoder(rConn).Encode(channels.WantConnect{
+		json.NewEncoder(rConn).Encode(common.WantConnect{
 			SDPOffer: SDP,
 			IDNode:   "",
 		})

@@ -1,9 +1,12 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/ranon-rat/frensmatria/nodes/src/core"
+	"github.com/ranon-rat/frensmatria/nodes/src/core/channels"
 	"github.com/ranon-rat/frensmatria/nodes/src/db"
 )
 
@@ -13,8 +16,14 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
-	format := core.FormatGematria(core.CalculateAllGematrias(input))
-	db.AddGematria(input, format)
+	g := core.GematriaSharing{
+		Content: input,
+		Date:    int(time.Now().Unix()),
+	}
+	// this is actually important :D
+	if db.AddGematria(g.Content, g.Date) == nil {
+		channels.ConnectionComm <- fmt.Sprintf("new %s", core.GematriaSharing2Base64(g))
+	}
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }

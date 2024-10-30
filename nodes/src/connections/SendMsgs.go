@@ -1,15 +1,15 @@
 package connections
 
+import "github.com/ranon-rat/frensmatria/nodes/src/core/channels"
+
 func SendMessages() {
 
 	for {
-		msg := <-MsgChan
-
+		// this will send anything related to anything that i am interested in
+		content := <-channels.ConnectionComm
 		for v := range Conns {
-			if msg.ID == v.ID {
-				continue
-			}
-			if err := v.Connection.SendText(msg.Content); err != nil {
+
+			if err := v.Connection.SendText(content); err != nil {
 				delete(Conns, v)
 				continue
 			}

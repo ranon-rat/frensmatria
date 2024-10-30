@@ -17,3 +17,9 @@ type Gematrias struct {
 	Sum      int
 	Values   []GematriaValue
 }
+
+// this will be used for sharing information between nodes :D
+type GematriaSharing struct {
+	Content string `json:"content"`
+	Date    int    `json:"date"`
+}

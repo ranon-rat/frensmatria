@@ -1,26 +1,24 @@
 package channels
 
-// this is for making it easy to communicate between  modules
-type Initial struct {
-	Kind int    `json:"kind"`
-	SDP  string `json:"direction"`
-}
+import "github.com/ranon-rat/frensmatria/common"
 
-// there
-type IDResponse struct {
-	ID string `json:"id"`
-}
-
-type WantConnect struct {
-	IDNode   string `json:"idNode"`
-	SDPOffer string `json:"SDP"` // if this is empty, that means that i shouldnt send it to the IDNode
-}
+const (
+	Add = "add"
+)
 
 var (
 	// this is relayConn->SDPConn
-	SDPChan = make(chan Initial)
+	SDPChan = make(chan common.Initial)
 	// SDPConn->relayConn
 	SDPChanAnswer = make(chan string)
 	// SDPConn->relayConn
 	SDPChanInivitation = make(chan string)
+	// Gematria->connections
+	// new     base64json // sending or receiving
+	// {content:"example",date:1234567} // check if the content is already in db
+	// compare base64json // this is just for sending, or receiving (if you receive this, you shouldnt share it with other nodes)
+	// {content:"example",date:12341325}
+	// end (this is for the comparing stuf)
+	// get dateTime // this is only for getting information
+	ConnectionComm = make(chan string)
 )

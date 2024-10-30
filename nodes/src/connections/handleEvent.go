@@ -38,8 +38,9 @@ func HandleEventConns() {
 		go func() {
 			for {
 
+				Comparing = append(Comparing, make(map[string]int))
 				msg := <-msgChan
-				OnMessage(conn, msg, ID)
+				OnMessage(conn, msg, len(Comparing))
 			}
 		}()
 		go func() {

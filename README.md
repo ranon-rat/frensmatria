@@ -2,7 +2,7 @@
 
 Welcome to **Frensmatria** – an innovative P2P network designed for exploring and expanding gematria knowledge!
 
-Currently, I'm in the development phase. I have many exciting features to implement, and some aspects of the relay may undergo changes. 
+Currently, it's in the development phase. I have many exciting features to implement, and some aspects of the relay may undergo changes. 
 
 ![Gematria Lookup](images/lookup.png)
 
@@ -21,11 +21,11 @@ To get started, simply run the file `nodes/main.go`. At this stage, I'm focusing
   - [x] Alphanumeric Qabbalah 
 - [x] **Web Interface for Interaction and Information Sharing**
   - [x] Calculate Gematria
-  - [x] View Recent Synchs
+  - [x] View Recent Results
   - [ ] Simple Chat (Tentative; this feature may be removed)
 - [x] **Database for Gematria Storage**
 - [ ] **Information Sharing Between Nodes** (events and more)
 - [ ] **Authentication** (passwords and other connection methods)
 - [ ] **Seed Node** for easier management
-
-
+- [ ] Multiple relays
+- [ ] Solomon codes(for error correction :D)

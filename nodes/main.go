@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"fmt"
-	"os"
 
 	"github.com/ranon-rat/frensmatria/nodes/src/SDPConn"
 	"github.com/ranon-rat/frensmatria/nodes/src/connections"
@@ -32,15 +30,7 @@ func SimpleChatUseWebRTC() {
 	go connections.SendMessages()
 
 	fmt.Println("share this ID:", relayConn.GiveID())
-	go func() {
-		for {
-			fmt.Print("> ")
-			reader := bufio.NewReader(os.Stdin)
-			content, _ := reader.ReadString('\n')
-			connections.SetMSG(content, "")
-		}
-	}()
-	select {}
+
 }
 func Setup() {
 	router.Setup()
