@@ -1,31 +1,54 @@
 # Frensmatria
 
-Welcome to **Frensmatria** – an innovative P2P network designed for exploring and expanding gematria knowledge!
-
-Currently, it's in the development phase. I have many exciting features to implement, and some aspects of the relay may undergo changes. 
+Welcome to **Frensmatria** – an innovative peer-to-peer (P2P) network dedicated to exploring and expanding gematria knowledge through collaborative nodes and a unified relay system.
 
 ![Gematria Lookup](images/lookup.png)
 
-## How to Test It
+Currently in development
 
-To get started, simply run the file `nodes/main.go`. At this stage, I'm focusing on building the website and database, so P2P functionalities aren't ready for testing yet.
+## Getting Started
 
-## TODO
+To get involved, you can start by running the `nodes/main.go` file. At this point, the primary focus is on the website and database structure, so the P2P features are not yet available for testing. 
 
-- [x] **Communication Between Nodes**
-- [x] **Relay for Sharing SDP Descriptor** 
-- [x] **Management of Multiple Connections**
+
+[![Frensmatria Demo](images/normie.mp3)](images/normie.mp3)
+
+## Key Features
+
+- **Node Communication**: Enables nodes to connect and share information.
+- **SDP Relay System**: Facilitates sharing of SDP descriptors for P2P connectivity.
+- **Connection Management**: Supports multiple connections across the network.
+- **Event Handling**: Manages real-time updates and communication events.
+- **Gematria Calculations**:
+  - Synx
+  - Alphanumeric Qabbalah
+- **Web Interface**:
+  - Interactive gematria calculator
+  - Recent results display
+- **Database Integration**: Stores gematria results for future access.
+- **Node Information Sharing**: Allows for the exchange of events and data across nodes.
+
+## Roadmap
+
+Here's a list of completed and planned features:
+
+- [x] **Node Communication**
+- [x] **Relay for SDP Sharing**
+- [x] **Multi-Connection Management**
 - [x] **Event Handler**
-- [x] **Gematria Calculations**
-  - [x] Synx
-  - [x] Alphanumeric Qabbalah 
-- [x] **Web Interface for Interaction and Information Sharing**
-  - [x] Calculate Gematria
-  - [x] View Recent Results
-  - [ ] Simple Chat (Tentative; this feature may be removed)
-- [x] **Database for Gematria Storage**
-- [ ] **Information Sharing Between Nodes** (events and more)
-- [ ] **Authentication** (passwords and other connection methods)
-- [ ] **Seed Node** for easier management
-- [ ] Multiple relays
-- [ ] Solomon codes(for error correction :D)
+- [x] **Gematria Calculations** (Synx and Alphanumeric Qabbalah)
+- [x] **Web Interface** (for calculating and viewing gematria results)
+- [ ] **Simple Chat** *(under consideration; may be removed)*
+- [x] **Database Integration**
+- [ ] **Authentication** (for secure access between nodes)
+- [ ] **Seed Node** (for streamlined node management)
+- [ ] **Additional Relays** (to enhance P2P connectivity)
+- [ ] **Error Correction** with Solomon Codes
+
+## Upcoming Enhancements
+
+- Improvements to relay functionalities
+- Expanded system for adding and sharing node information
+- Enhanced database capabilities for historical data tracking
+
+Thank you for your interest in Frensmatria! Stay tuned for more updates as we continue developing this platform.
