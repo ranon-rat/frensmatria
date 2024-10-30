@@ -11,7 +11,6 @@ Currently in development
 To get involved, you can start by running the `nodes/main.go` file. At this point, the primary focus is on the website and database structure, so the P2P features are not yet available for testing. 
 
 
-[![Frensmatria Demo](images/normie.mp3)](images/normie.mp3)
 
 ## Key Features
 
