@@ -4,9 +4,9 @@ package main
 // the relay seems to  be ready
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"net"
-	"os"
 
 	"github.com/ranon-rat/frensmatria/common"
 )
@@ -70,12 +70,10 @@ func manageConnections(c net.Conn) {
 	}
 }
 func main() {
-	port, e := os.LookupEnv("PORT")
-	if !e {
-		port = "8080"
-	}
+	port := flag.String("port", "8080", "its the port for the local server")
+	flag.Parse()
 
-	server, err := net.Listen("tcp", fmt.Sprintf("localhost:%s", port))
+	server, err := net.Listen("tcp", fmt.Sprintf("localhost:%s", *port))
 	if err != nil {
 		panic(err)
 	}

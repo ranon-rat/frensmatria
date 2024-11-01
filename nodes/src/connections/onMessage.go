@@ -13,14 +13,14 @@ import (
 )
 
 // Gematria->connections
-// new     base64json // sending or receiving
-// {content:"example",date:1234567} // check if the content is already in db
+// new     base64json // sending or receiving, it will check that if its in the db
 // compare base64json // this is just for sending, or receiving (if you receive this, you shouldnt share it with other nodes)
-// {content:"example",date:12341325}
 // end (this is for the comparing stuf)
 // get dateTime // this is only for getting information
 // new, compare, end, get, those are all
-func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, id string) {
+
+// probably i will add something new for the messages
+func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, ID string) {
 	information := strings.Split(string(msg.Data), " ")
 	if len(information) < 2 {
 		return
@@ -35,27 +35,27 @@ func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, id strin
 			return
 		}
 		if db.AddGematria(g.Content, g.Date) == nil {
-			channels.SendMessage(fmt.Sprintf("new %s", core.GematriaSharing2Base64(g)), id)
+			channels.SendMessage(fmt.Sprintf("new %s", core.GematriaSharing2Base64(g)), ID)
 		}
 	case "get":
 		date, _ := strconv.Atoi(information[1])
 		db.GetAllGematria(conn, date)
 
 	case "compare":
-		if !ComparingQs[id] {
+		if !ComparingQs[ID] {
 			return
 		}
-		IncreaseLifeTime[id] <- struct{}{}
+		IncreaseLifeTime[ID] <- struct{}{}
 		g := core.Base64_2GematriaSharing(information[1])
 		if g.Content == "" {
 			return
 		}
 		log.Println("Comparing", g.Content)
-		ComparingMap[id][g.Content] = g.Date
+		ComparingMap[ID][g.Content] = g.Date
 
 	case "end":
 		// not finished yet, i still need to modify some other stuff for improving the system
-		OnEnding(id)
+		OnEnding(ID)
 
 	default:
 		return
