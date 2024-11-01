@@ -51,3 +51,5 @@ Here's a list of completed and planned features:
 - Enhanced database capabilities for historical data tracking
 
 Thank you for your interest in Frensmatria! Stay tuned for more updates as we continue developing this platform.
+
+![n](images/normie.webm)
