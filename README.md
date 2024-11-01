@@ -50,4 +50,6 @@ Here's a list of completed and planned features:
 - Expanded system for adding and sharing node information
 
 Thank you for your interest in Frensmatria! Stay tuned for more updates as we continue developing this platform.
-[normie.webm](https://github.com/user-attachments/assets/b3b53278-b24c-48ba-8cdb-d1e5f1a99379)
+
+
+![normie.webm](https://github.com/user-attachments/assets/b3b53278-b24c-48ba-8cdb-d1e5f1a99379)
