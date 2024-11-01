@@ -31,6 +31,9 @@ func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, id strin
 		log.Println("New", g.Content)
 
 		// this is actually important :D
+		if g.Content == "" {
+			return
+		}
 		if db.AddGematria(g.Content, g.Date) == nil {
 			channels.SendMessage(fmt.Sprintf("new %s", core.GematriaSharing2Base64(g)), id)
 		}
@@ -44,16 +47,15 @@ func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, id strin
 		}
 		IncreaseLifeTime[id] <- struct{}{}
 		g := core.Base64_2GematriaSharing(information[1])
+		if g.Content == "" {
+			return
+		}
 		log.Println("Comparing", g.Content)
 		ComparingMap[id][g.Content] = g.Date
 
 	case "end":
 		// not finished yet, i still need to modify some other stuff for improving the system
-		if ComparingQs[id] {
-			ComparingNodes--
-			delete(ComparingQs, id)
-			CompareEndChan <- struct{}{}
-		}
+		OnEnding(id)
 
 	default:
 		return
@@ -61,6 +63,10 @@ func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, id strin
 
 }
 
-/*
-pensemos que vamos a hacer...
-*/
+func OnEnding(id string) {
+	if ComparingQs[id] {
+		ComparingNodes--
+		delete(ComparingQs, id)
+		CompareEndChan <- struct{}{}
+	}
+}

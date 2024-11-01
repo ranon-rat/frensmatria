@@ -30,10 +30,6 @@ func OnOpen(conn *webrtc.DataChannel, ID string) {
 		time.Sleep(time.Second * 2)
 		lifeTime--
 	}
-	if ComparingQs[ID] {
-		ComparingNodes--
-		delete(ComparingQs, ID)
-		CompareEndChan <- struct{}{}
+	OnEnding(ID)
 
-	}
 }
