@@ -79,7 +79,7 @@ func main() {
 	}
 	defer server.Close()
 	fmt.Println("starting server")
-	fmt.Printf("you can connect via %s:%s\n", "localhost", port)
+	fmt.Printf("you can connect via %s:%s\n", "localhost", *port)
 
 	for {
 
