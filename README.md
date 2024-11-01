@@ -51,4 +51,3 @@ Here's a list of completed and planned features:
 
 Thank you for your interest in Frensmatria! Stay tuned for more updates as we continue developing this platform.
 
-![n](images/normie.webm)
