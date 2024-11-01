@@ -2,12 +2,15 @@ package connections
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/pion/webrtc/v3"
 )
 
 func OnOpen(conn *webrtc.DataChannel, ID string) {
+	log.Println("New Connection")
+
 	if ComparingQ {
 		ComparingNodes++
 

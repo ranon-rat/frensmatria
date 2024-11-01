@@ -1,6 +1,7 @@
 package router
 
 import (
+	"log"
 	"net/http"
 	"os"
 
@@ -8,6 +9,7 @@ import (
 )
 
 func Setup() {
+	log.Println("starting server")
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static", fs)) // basic files
 	http.HandleFunc("/", controllers.Index)

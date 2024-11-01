@@ -31,7 +31,6 @@ func Setup() {
 }
 
 func main() {
-	fmt.Println("hello world")
 
 	go Setup()
 	router.Setup()
