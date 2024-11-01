@@ -40,7 +40,6 @@ Here's a list of completed and planned features:
 - [ ] **Simple Chat** *(under consideration; may be removed)*
 - [x] **Database Integration**
 - [ ] **Authentication** (for secure access between nodes)
-- [ ] **Seed Node** (for streamlined node management)
 - [ ] **Additional Relays** (to enhance P2P connectivity)
 - [ ] **Error Correction** with Solomon Codes
 
