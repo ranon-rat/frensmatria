@@ -48,6 +48,5 @@ Here's a list of completed and planned features:
 
 - Improvements to relay functionalities
 - Expanded system for adding and sharing node information
-- Enhanced database capabilities for historical data tracking
 
 Thank you for your interest in Frensmatria! Stay tuned for more updates as we continue developing this platform.
