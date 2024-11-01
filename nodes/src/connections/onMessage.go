@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/pion/webrtc/v3"
-	"github.com/ranon-rat/frensmatria/nodes/src/compare"
 	"github.com/ranon-rat/frensmatria/nodes/src/core"
 	"github.com/ranon-rat/frensmatria/nodes/src/core/channels"
 	"github.com/ranon-rat/frensmatria/nodes/src/db"
@@ -21,45 +20,39 @@ import (
 // end (this is for the comparing stuf)
 // get dateTime // this is only for getting information
 // new, compare, end, get, those are all
-func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, i int) {
+func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, id string) {
 	information := strings.Split(string(msg.Data), " ")
 	if len(information) < 2 {
 		return
 	}
-
 	switch information[0] {
-	case "get":
-		date, _ := strconv.Atoi(information[1])
-		db.GetAllGematria(conn, date)
-
 	case "new":
 		g := core.Base64_2GematriaSharing(information[1])
 		log.Println("New", g.Content)
 
 		// this is actually important :D
 		if db.AddGematria(g.Content, g.Date) == nil {
-			channels.ConnectionComm <- fmt.Sprintf("new %s", core.GematriaSharing2Base64(g))
+			channels.SendMessage(fmt.Sprintf("new %s", core.GematriaSharing2Base64(g)), id)
 		}
+	case "get":
+		date, _ := strconv.Atoi(information[1])
+		db.GetAllGematria(conn, date)
+
 	case "compare":
-		if !ComparingQs[i] {
+		if !ComparingQs[id] {
 			return
 		}
+		IncreaseLifeTime[id] <- struct{}{}
 		g := core.Base64_2GematriaSharing(information[1])
 		log.Println("Comparing", g.Content)
-		ComparingMap[i][g.Content] = g.Date
+		ComparingMap[id][g.Content] = g.Date
 
 	case "end":
-
 		// not finished yet, i still need to modify some other stuff for improving the system
-		if ComparingQs[i] {
+		if ComparingQs[id] {
 			ComparingNodes--
-			ComparingQs[i] = false
-		}
-		if ComparingNodes == 0 {
-			compare.Compare(ComparingMap, CurrentDate)
-			ComparingMap = []map[string]int{}
-			ComparingQ = false
-			ComparingQs = []bool{}
+			delete(ComparingQs, id)
+			CompareEndChan <- struct{}{}
 		}
 
 	default:

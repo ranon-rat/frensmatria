@@ -20,5 +20,17 @@ var (
 	// {content:"example",date:12341325}
 	// end (this is for the comparing stuf)
 	// get dateTime // this is only for getting information
-	ConnectionComm = make(chan string)
+	ConnectionComm = make(chan Message)
 )
+
+type Message struct {
+	ID      string
+	Content string
+}
+
+func SendMessage(msg, ID string) {
+	ConnectionComm <- Message{
+		ID:      ID,
+		Content: msg,
+	}
+}

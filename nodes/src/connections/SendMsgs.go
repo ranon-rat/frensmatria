@@ -7,13 +7,17 @@ func SendMessages() {
 	for {
 		// this will send anything related to anything that i am interested in
 		content := <-channels.ConnectionComm
-		for v := range Conns {
-
-			if err := v.Connection.SendText(content); err != nil {
-				delete(Conns, v)
-				continue
-			}
-
+		SendMessageEveryone(content)
+	}
+}
+func SendMessageEveryone(content channels.Message) {
+	for v := range Conns {
+		if v.ID == content.ID {
+			continue
+		}
+		if err := v.Connection.SendText(content.Content); err != nil {
+			delete(Conns, v)
+			continue
 		}
 	}
 }

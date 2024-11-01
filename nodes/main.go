@@ -26,17 +26,13 @@ func Setup() {
 
 	// this handles the events
 	// okay so this seems to be quite simple
-	connections.SetDate()
-	go connections.HandleEventConns()
-	go connections.SendMessages()
-
+	go connections.Setup()
 	fmt.Println("share this ID:", relayConn.GiveID())
-
 }
 
 func main() {
 	fmt.Println("hello world")
-	//fmt.Println(db.GematriaByID(0))
+
 	go Setup()
 	router.Setup()
 }

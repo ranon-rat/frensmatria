@@ -2,18 +2,8 @@ package connections
 
 import (
 	"fmt"
-	"math/rand"
 )
 
-var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-
-func RandStringRunes(n int) string {
-	b := make([]rune, n)
-	for i := range b {
-		b[i] = letterRunes[rand.Intn(len(letterRunes))]
-	}
-	return string(b)
-}
 func HandleEventConns() {
 
 	for {
@@ -31,17 +21,18 @@ func HandleEventConns() {
 		}
 		Conns[cID] = true
 
+		IncreaseLifeTime[ID] = make(chan struct{})
 		// so this will be listening when we close the channel
 		go func() {
-			OnOpen(conn)
+			OnOpen(conn, ID)
 		}()
 		go func() {
 			for {
 
-				ComparingMap = append(ComparingMap, make(map[string]int))
-				ComparingQs = append(ComparingQs, true)
+				ComparingMap[ID] = make(map[string]int)
+				ComparingQs[ID] = true
 				msg := <-msgChan
-				OnMessage(conn, msg, len(ComparingMap)-1)
+				OnMessage(conn, msg, ID)
 			}
 		}()
 		go func() {

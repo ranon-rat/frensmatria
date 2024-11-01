@@ -1,4 +1,4 @@
-package compare
+package connections
 
 import (
 	"fmt"
@@ -9,7 +9,20 @@ import (
 	"github.com/ranon-rat/frensmatria/nodes/src/db"
 )
 
-func Compare(compare []map[string]int, currentDate int) {
+func CompareEndingEvent() {
+	for ComparingQ {
+		<-CompareEndChan
+		if ComparingNodes == 0 {
+			CompareResults(ComparingMap, LastDate)
+			ComparingMap = map[string]map[string]int{}
+			ComparingQ = false
+			ComparingQs = map[string]bool{}
+		}
+	}
+
+}
+
+func CompareResults(compare map[string]map[string]int, currentDate int) {
 	final := make(map[string]int)
 	// in case each map has different size
 	for _, m := range compare {
@@ -34,10 +47,10 @@ func Compare(compare []map[string]int, currentDate int) {
 			}
 			date := GetBiggerDate(dates)
 			if newInput {
-				channels.ConnectionComm <- fmt.Sprintf("new %s", core.GematriaSharing2Base64(core.GematriaSharing{
+				channels.SendMessage(fmt.Sprintf("new %s", core.GematriaSharing2Base64(core.GematriaSharing{
 					Content: input,
 					Date:    date,
-				}))
+				})), "")
 			}
 			final[input] = date
 		}
