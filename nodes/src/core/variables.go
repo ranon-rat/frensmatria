@@ -1,12 +1,5 @@
 package core
 
-// connection shit
-const (
-	Nothing   = iota
-	ConnectTo = iota
-	Confirm   = iota
-)
-
 // pagination shit
 const LIMIT = 15
 

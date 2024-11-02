@@ -1,7 +1,7 @@
 package SDPConn
 
 import (
-	"github.com/ranon-rat/frensmatria/nodes/src/core"
+	"github.com/ranon-rat/frensmatria/common"
 	"github.com/ranon-rat/frensmatria/nodes/src/core/channels"
 )
 
@@ -14,9 +14,9 @@ func ConnectToNodes() {
 
 		answerSDP := <-channels.SDPChan
 		switch answerSDP.Kind {
-		case core.ConnectTo:
+		case common.ConnectTo:
 			SDPOfferChan <- answerSDP.SDP
-		case core.Confirm:
+		case common.Confirm:
 			SDPAnswerChan <- answerSDP.SDP
 		default:
 			continue
