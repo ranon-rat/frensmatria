@@ -26,6 +26,14 @@ func Setup(relayAddrs, idNode string, update bool) {
 }
 
 func main() {
+	fmt.Println(color.New(color.Bold).AddRGB(100, 0, 255).SprintFunc()(
+		`
+┏┓               •  
+┣ ┏┓┏┓┏┓┏┏┳┓┏┓╋┏┓┓┏┓
+┻ ┛ ┗ ┛┗┛┛┗┗┗┻┗┛ ┗┗┻
+created by @tecnopsychosis
+
+`)) // tmplr ascii art on https://patorjk.com/
 
 	relayAddrs := flag.String("relay", "localhost:9090", "just connect to a relay so we can hole punch")
 	idNode := flag.String("node", "", "is just the id that the relay generats, use it to connect with someone else")
