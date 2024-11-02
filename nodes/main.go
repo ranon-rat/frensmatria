@@ -27,7 +27,7 @@ func main() {
 ┏┓               •  
 ┣ ┏┓┏┓┏┓┏┏┳┓┏┓╋┏┓┓┏┓
 ┻ ┛ ┗ ┛┗┛┛┗┗┗┻┗┛ ┗┗┻
-created by @tecnopsychosis
+created by @tecnopsychosis(AQ 333)
 
 `)) // tmplr ascii art on https://patorjk.com/
 

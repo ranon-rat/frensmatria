@@ -18,7 +18,7 @@ func LogColor(input ...any) {
 	t := time.Now()
 
 	fmt.Println(append([]any{
-		c("%d/%02d/%02d %02d:%02d:%02d ",
+		c("[%d/%02d/%02d %02d:%02d:%02d]",
 			t.Year(), t.Month(), t.Day(),
 			t.Hour(), t.Minute(), t.Second())}, input...)...)
 
