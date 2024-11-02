@@ -27,7 +27,7 @@ func GetAllGematria(conn *webrtc.DataChannel, date int) {
 		}()
 	}
 	wg.Wait()
-	// esto deberia de ser suficiente creo yo, espero que no genere problemas el enviarlo de manera asincrona
+	// i hope i dont have any problem because of the concurrency XD
 	conn.SendText("end")
 }
 
