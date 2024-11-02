@@ -20,7 +20,8 @@ import (
 // new, compare, end, get, those are all
 
 // probably i will add something new for the messages
-func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, ID string) {
+func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
+	ID := conn.ID
 	information := strings.Split(string(msg.Data), " ")
 	if len(information) < 2 {
 		return
@@ -41,7 +42,9 @@ func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, ID strin
 			return
 		}
 		log.Println(information[0], date)
-		db.GetAllGematria(conn, date)
+		if db.GetAllGematria(conn.Connection, date) != nil {
+			OnClose(conn)
+		}
 	case "compare":
 		if !ComparingQs[ID] {
 			// maybe i should add something so it just stops?

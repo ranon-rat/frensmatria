@@ -11,16 +11,12 @@ import (
 )
 
 func Setup(relayAddrs, idNode string, update bool) {
-	// some simple shit for using it later
-
 	// sdp connections
 	SDPConn.Setup()
 	// relay communication
 	relayConn.Setup(relayAddrs, idNode)
-
 	// this handles the events
-	// okay so this seems to be quite simple
-	go connections.Setup(update)
+	connections.Setup(update)
 	fmt.Println("share this ID:", relayConn.GiveID())
 }
 

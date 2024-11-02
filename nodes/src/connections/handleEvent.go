@@ -1,13 +1,16 @@
 package connections
 
-import "github.com/pion/webrtc/v3"
+import (
+	"github.com/pion/webrtc/v3"
+	"github.com/ranon-rat/frensmatria/nodes/src/core"
+)
 
 // we will receive things through the data channel
 func HandleEventConns() {
 
 	for {
 		conn := <-ConnInfoChan
-		ID := RandStringRunes(10)
+		ID := core.RandStringRunes(10)
 		cID := ConnectionID{
 			ID:         ID,
 			Connection: conn,
@@ -21,7 +24,7 @@ func HandleEventConns() {
 		// so this will be listening when we close the channel
 		go OnOpen(conn, ID)
 		conn.OnMessage(func(msg webrtc.DataChannelMessage) {
-			OnMessage(conn, msg, ID)
+			OnMessage(cID, msg)
 		})
 		conn.OnError(func(err error) {
 			OnClose(cID)

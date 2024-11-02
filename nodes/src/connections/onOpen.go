@@ -30,5 +30,4 @@ func OnOpen(conn *webrtc.DataChannel, ID string) {
 		lifeTime--
 	}
 	OnEnding(ID)
-
 }

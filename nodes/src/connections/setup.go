@@ -1,10 +1,15 @@
 package connections
 
+import "github.com/ranon-rat/frensmatria/nodes/src/db"
+
 func Setup(update bool) {
 	if update {
-		SetDate()
+		LastDate = db.GetLastDate()
+		ComparingQ = true
+		go CompareEndingEvent()
+
 	}
-	go CompareEndingEvent()
 	go SendMessages()
-	HandleEventConns()
+	go HandleEventConns()
+
 }

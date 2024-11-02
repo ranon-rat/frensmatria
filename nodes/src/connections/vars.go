@@ -1,10 +1,7 @@
 package connections
 
 import (
-	"math/rand"
-
 	"github.com/pion/webrtc/v3"
-	"github.com/ranon-rat/frensmatria/nodes/src/db"
 )
 
 var (
@@ -22,22 +19,8 @@ var (
 	ComparingNodes = 0
 	ComparingQ     = false
 
-	LastDate    = 0
-	letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+	LastDate = 0
 )
-
-func SetDate() {
-	LastDate = db.GetLastDate()
-	ComparingQ = true
-}
-
-func RandStringRunes(n int) string {
-	b := make([]rune, n)
-	for i := range b {
-		b[i] = letterRunes[rand.Intn(len(letterRunes))]
-	}
-	return string(b)
-}
 
 type ConnectionID struct {
 	Connection *webrtc.DataChannel
