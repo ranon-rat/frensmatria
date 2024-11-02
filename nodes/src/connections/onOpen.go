@@ -10,20 +10,18 @@ import (
 
 func OnOpen(conn *webrtc.DataChannel, ID string) {
 	log.Println("New Connection")
-
-	if ComparingQ {
-		ComparingNodes++
-
-		conn.SendText(fmt.Sprintf("get %d", LastDate))
-	}
 	if !ComparingQ {
 		return
 	}
+	ComparingNodes++
+	conn.SendText(fmt.Sprintf("get %d", LastDate))
+
 	lifeTime := 10
 	go func() {
 		for {
 			<-IncreaseLifeTime[ID]
 			lifeTime += 5
+			lifeTime = min(lifeTime, 50)
 		}
 	}()
 	for lifeTime > 0 {

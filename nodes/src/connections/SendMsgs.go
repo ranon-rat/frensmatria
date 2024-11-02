@@ -5,7 +5,6 @@ import "github.com/ranon-rat/frensmatria/nodes/src/core/channels"
 func SendMessages() {
 
 	for {
-		// this will send anything related to anything that i am interested in
 		content := <-channels.ConnectionComm
 		SendMessageEveryone(content)
 	}

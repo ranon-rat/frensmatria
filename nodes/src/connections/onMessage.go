@@ -28,21 +28,19 @@ func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, ID strin
 	switch information[0] {
 	case "new":
 		g := core.Base64_2GematriaSharing(information[1])
-		log.Println("New", g.Content)
-
-		// this is actually important :D
 		if g.Content == "" {
 			return
 		}
+		log.Println("New", g.Content)
 		if db.AddGematria(g.Content, g.Date) == nil {
 			channels.SendMessage(fmt.Sprintf("new %s", core.GematriaSharing2Base64(g)), ID)
 		}
 	case "get":
 		date, _ := strconv.Atoi(information[1])
 		db.GetAllGematria(conn, date)
-
 	case "compare":
 		if !ComparingQs[ID] {
+			// maybe i should add something so it just stops?
 			return
 		}
 		IncreaseLifeTime[ID] <- struct{}{}

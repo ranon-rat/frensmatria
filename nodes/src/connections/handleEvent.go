@@ -1,9 +1,5 @@
 package connections
 
-import (
-	"fmt"
-)
-
 func HandleEventConns() {
 
 	for {
@@ -13,15 +9,12 @@ func HandleEventConns() {
 		msgChan := connInfo.MsgChan
 		conn := connInfo.Connection
 		ID := RandStringRunes(10)
-
-		fmt.Println("sup we are back")
 		cID := ConnectionID{
 			ID:         ID,
 			Connection: conn,
 		}
 		Conns[cID] = true
 		if ComparingQ {
-
 			IncreaseLifeTime[ID] = make(chan struct{})
 			ComparingMap[ID] = make(map[string]int)
 			ComparingQs[ID] = true
