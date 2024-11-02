@@ -30,7 +30,6 @@ func HandleEventConns() {
 		conn.OnMessage(func(msg webrtc.DataChannelMessage) {
 			OnMessage(cID, msg)
 		})
-
 		conn.OnError(func(err error) {
 			OnClose(cID)
 		})

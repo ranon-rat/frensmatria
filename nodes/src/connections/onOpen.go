@@ -13,7 +13,7 @@ func OnOpen(conn ConnectionID) {
 	if !ComparingQ {
 		go OnOpenComparing(conn)
 	}
-	go SendAlive(conn)
+	go SendAlive(conn) // with this we only say "hey, i am alive :D"
 	CloseIfNoResponse(conn)
 }
 func OnOpenComparing(conn ConnectionID) {
@@ -23,6 +23,7 @@ func OnOpenComparing(conn ConnectionID) {
 	LifeTime(10, 30, 5, max(1, 5/len(Conns)), 1, IncreaseLifeTime[conn.ID])
 	OnEnding(conn.ID)
 }
+
 func SendAlive(conn ConnectionID) {
 	for {
 		if err := conn.Connection.SendText("A"); err != nil {
@@ -32,18 +33,20 @@ func SendAlive(conn ConnectionID) {
 		time.Sleep(time.Second * 15)
 	}
 }
+
 func CloseIfNoResponse(conn ConnectionID) {
 	LifeTime(10, 30, 5, 4, 1, Alive[conn.ID])
 	conn.Connection.Close()
 
 	core.LogColor("disconnecting:", color.New(color.Bold, color.FgRed).Sprint("reason timeout"))
+	// okay so, for some reason we have some problems when i close the program with ctrl+c
+	// so i need to do this shit, fuck
 	OnClose(conn)
 }
 
-// the initial value which it starts with
-// the maximum value
-// interval
-// addition of the liftime and the subtraction of the liftime
+// this works for keeping something alive the connection and in case that it has passed way too much time
+// the function just finish, so its useful for things like timeout, and other stuff.
+
 func LifeTime(initialLifeTime, maxVal, interval, adding, substract int, check chan struct{}) {
 	lifeTime := initialLifeTime
 	go func() {

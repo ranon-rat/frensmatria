@@ -48,7 +48,6 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		}
 	case "compare":
 		if !ComparingQs[ID] {
-			// maybe i should add something so it just stops?
 			return
 		}
 		IncreaseLifeTime[ID] <- struct{}{}
