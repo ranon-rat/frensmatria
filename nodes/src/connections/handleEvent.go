@@ -1,10 +1,12 @@
 package connections
 
+import "github.com/pion/webrtc/v3"
+
+// we will receive things through the data channel
 func HandleEventConns() {
 
 	for {
-		connInfo := <-ConnInfoChan
-		conn := connInfo.Connection
+		conn := <-ConnInfoChan
 		ID := RandStringRunes(10)
 		cID := ConnectionID{
 			ID:         ID,
@@ -17,19 +19,15 @@ func HandleEventConns() {
 			ComparingQs[ID] = true
 		}
 		// so this will be listening when we close the channel
-		go func() {
-			OnOpen(conn, ID)
-		}()
-		go func() {
-			for {
-				msg := <-connInfo.MsgChan
-				OnMessage(conn, msg, ID)
-			}
-		}()
-		go func() {
-			<-connInfo.CloseChan
+		go OnOpen(conn, ID)
+		conn.OnMessage(func(msg webrtc.DataChannelMessage) {
+			OnMessage(conn, msg, ID)
+		})
+		conn.OnError(func(err error) {
 			OnClose(cID)
-		}()
-
+		})
+		conn.OnClose(func() {
+			OnClose(cID)
+		})
 	}
 }

@@ -1,8 +1,6 @@
 package SDPConn
 
 import (
-	"fmt"
-
 	"github.com/ranon-rat/frensmatria/nodes/src/core"
 	"github.com/ranon-rat/frensmatria/nodes/src/core/channels"
 )
@@ -15,7 +13,6 @@ func ConnectToNodes() {
 	for {
 
 		answerSDP := <-channels.SDPChan
-		fmt.Println("new connection")
 		switch answerSDP.Kind {
 		case core.ConnectTo:
 			SDPOfferChan <- answerSDP.SDP

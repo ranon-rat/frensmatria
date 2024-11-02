@@ -1,7 +1,9 @@
 package connections
 
-func Setup() {
-	SetDate()
+func Setup(update bool) {
+	if update {
+		SetDate()
+	}
 	go CompareEndingEvent()
 	go SendMessages()
 	HandleEventConns()

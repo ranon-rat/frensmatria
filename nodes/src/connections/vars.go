@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	ConnInfoChan = make(chan ConnectionInfo)
+	ConnInfoChan = make(chan *webrtc.DataChannel)
 	Conns        = make(map[ConnectionID]bool)
 
 	// its a simple map for mantaining some order
@@ -37,12 +37,6 @@ func RandStringRunes(n int) string {
 		b[i] = letterRunes[rand.Intn(len(letterRunes))]
 	}
 	return string(b)
-}
-
-type ConnectionInfo struct {
-	CloseChan  chan struct{}
-	Connection *webrtc.DataChannel
-	MsgChan    chan webrtc.DataChannelMessage
 }
 
 type ConnectionID struct {

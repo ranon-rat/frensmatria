@@ -14,21 +14,10 @@ for entering connections
 */
 
 func dcHandler(d *webrtc.DataChannel) {
-	closeChan := make(chan struct{})
-	msgChan := make(chan webrtc.DataChannelMessage)
+
 	d.OnOpen(func() {
-		connections.ConnInfoChan <- connections.ConnectionInfo{
-			CloseChan:  closeChan,
-			MsgChan:    msgChan,
-			Connection: d,
-		}
+		connections.ConnInfoChan <- d
 
 	})
-	d.OnClose(func() {
-		closeChan <- struct{}{}
 
-	})
-	d.OnMessage(func(msg webrtc.DataChannelMessage) {
-		msgChan <- msg
-	})
 }

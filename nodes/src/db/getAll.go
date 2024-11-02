@@ -2,6 +2,7 @@ package db
 
 import (
 	"fmt"
+	"log"
 	"sync"
 
 	"github.com/pion/webrtc/v3"
@@ -19,6 +20,8 @@ func GetLastDate() (date int) {
 	db := Connect()
 	defer db.Close()
 	db.QueryRow(query).Scan(&date)
+	log.Println(date)
+
 	return
 }
 
@@ -49,10 +52,11 @@ func GetGematriaPagination(page int) (tableRows [][]string) {
 // this is simple, it doesnt needs more
 func GetAllGematria(conn *webrtc.DataChannel, date int) {
 	// for some reason the > operator its working as a >= its quite weird
-	query := `SELECT input, datePost From gematrias WHERE datePost>?1 AND datePost<>?1`
+	query := `SELECT input, datePost From gematrias WHERE datePost>?`
 	db := Connect()
 	defer db.Close()
 	rows, _ := db.Query(query, date)
+	log.Println(date)
 	// we are back
 	var wg sync.WaitGroup
 

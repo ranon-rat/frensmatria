@@ -31,12 +31,16 @@ func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, ID strin
 		if g.Content == "" {
 			return
 		}
-		log.Println("New", g.Content)
+		log.Println(information[0], g.Content, g.Date)
 		if db.AddGematria(g.Content, g.Date) == nil {
 			channels.SendMessage(fmt.Sprintf("new %s", core.GematriaSharing2Base64(g)), ID)
 		}
 	case "get":
 		date, _ := strconv.Atoi(information[1])
+		if date == 0 {
+			return
+		}
+		log.Println(information[0], date)
 		db.GetAllGematria(conn, date)
 	case "compare":
 		if !ComparingQs[ID] {
@@ -48,10 +52,11 @@ func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, ID strin
 		if g.Content == "" {
 			return
 		}
-		log.Println("Comparing", g.Content)
+		log.Println(information[0], g.Content, g.Date)
 		ComparingMap[ID][g.Content] = g.Date
 
 	case "end":
+		log.Println(information[0])
 		OnEnding(ID)
 	default:
 		return

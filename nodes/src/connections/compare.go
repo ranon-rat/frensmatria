@@ -25,7 +25,7 @@ func CompareEndingEvent() {
 func CompareResults(compare map[string]map[string]int, currentDate int) {
 	final := make(map[string]int)
 	// in case each map has different size
-	for _, m := range compare {
+	for id, m := range compare {
 		for input := range m {
 			if _, e := final[input]; e {
 				continue
@@ -51,7 +51,7 @@ func CompareResults(compare map[string]map[string]int, currentDate int) {
 				channels.SendMessage(fmt.Sprintf("new %s", core.GematriaSharing2Base64(core.GematriaSharing{
 					Content: input,
 					Date:    date,
-				})), "")
+				})), id)
 			}
 			final[input] = date
 		}
