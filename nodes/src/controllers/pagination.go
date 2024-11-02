@@ -47,17 +47,3 @@ func calculatePagination(currentPage, totalItems int) Pagination {
 		Next:        min(currentPage+1, endPage),
 	}
 }
-
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
