@@ -5,7 +5,7 @@ import (
 	"github.com/ranon-rat/frensmatria/nodes/src/core"
 )
 
-// we will receive things through the data channel
+// we will receive things through the data channel when its opened
 func HandleEventConns() {
 
 	for {
@@ -21,7 +21,6 @@ func HandleEventConns() {
 			ComparingMap[ID] = make(map[string]int)
 			ComparingQs[ID] = true
 		}
-		// so this will be listening when we close the channel
 		go OnOpen(conn, ID)
 		conn.OnMessage(func(msg webrtc.DataChannelMessage) {
 			OnMessage(cID, msg)

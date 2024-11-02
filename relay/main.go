@@ -70,7 +70,8 @@ func manageConnections(c net.Conn) {
 	}
 }
 func main() {
-	port := flag.String("port", "8080", "its the port for the local server")
+
+	port := flag.String("port", "9090", "its the port for the local server")
 	flag.Parse()
 
 	server, err := net.Listen("tcp", fmt.Sprintf("localhost:%s", *port))
