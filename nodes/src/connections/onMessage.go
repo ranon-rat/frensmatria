@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/fatih/color"
 	"github.com/pion/webrtc/v3"
 	"github.com/ranon-rat/frensmatria/nodes/src/core"
 	"github.com/ranon-rat/frensmatria/nodes/src/core/channels"
@@ -32,7 +33,7 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		if g.Content == "" {
 			return
 		}
-		core.LogColor(information[0], g.Content, g.Date)
+		core.LogColor(color.New(color.FgGreen).Sprint("new message:"), information[0], g.Content, g.Date)
 		if db.AddGematria(g.Content, g.Date) == nil {
 			channels.SendMessage(fmt.Sprintf("new %s", core.GematriaSharing2Base64(g)), ID)
 		}
@@ -41,7 +42,7 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		if date == 0 {
 			return
 		}
-		core.LogColor(information[0], date)
+		core.LogColor(color.New(color.FgGreen).Sprint("new message:"), information[0], date)
 		if db.GetAllGematria(conn.Connection, date) != nil {
 			conn.Connection.Close()
 		}
@@ -55,15 +56,12 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		if g.Content == "" {
 			return
 		}
-		core.LogColor(information[0], g.Content, g.Date)
+		core.LogColor(color.New(color.FgGreen).Sprint("new message:"), information[0], g.Content, g.Date)
 		ComparingMap[ID][g.Content] = g.Date
-
 	case "end":
-		core.LogColor(information[0])
+		core.LogColor(color.New(color.FgGreen).Sprint("new message:"), information[0])
 		OnEnding(ID)
-
 	default:
-
 		return
 	}
 

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/fatih/color"
 	"github.com/ranon-rat/frensmatria/nodes/src/core"
 )
 
@@ -34,7 +35,8 @@ func SendAlive(conn ConnectionID) {
 func CloseIfNoResponse(conn ConnectionID) {
 	LifeTime(10, 30, 5, 4, 1, Alive[conn.ID])
 	conn.Connection.Close()
-	core.LogColor("disconnecting: reason timeout")
+
+	core.LogColor("disconnecting:", color.New(color.Bold, color.FgRed).Sprint("reason timeout"))
 	OnClose(conn)
 }
 

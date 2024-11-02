@@ -24,7 +24,6 @@ func HandleEventConns() {
 		}
 		go OnOpen(cID)
 
-		//go JustChecking(cID)
 		conn.OnClose(func() {
 			OnClose(cID)
 		})

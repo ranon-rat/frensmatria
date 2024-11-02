@@ -14,13 +14,13 @@ import (
 var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
 func LogColor(input ...any) {
-	c := color.New(color.Bold).AddRGB(0, 255, 0).SprintFunc()
+	c := color.New(color.Bold).AddRGB(0, 255, 0).Sprintf
 	t := time.Now()
 
 	fmt.Println(append([]any{
-		c(fmt.Sprintf("%d/%02d/%02d %02d:%02d:%02d ",
+		c("%d/%02d/%02d %02d:%02d:%02d ",
 			t.Year(), t.Month(), t.Day(),
-			t.Hour(), t.Minute(), t.Second()))}, input...)...)
+			t.Hour(), t.Minute(), t.Second())}, input...)...)
 
 }
 
