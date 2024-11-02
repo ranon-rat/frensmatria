@@ -25,6 +25,7 @@ func Setup(relayAddrs, idNode string) {
 }
 
 func main() {
+
 	relayAddrs := flag.String("relay", "localhost:8080", "just connect to a relay so we can hole punch")
 	idNode := flag.String("node", "", "is just the id that the relay generats, use it to connect with someone else")
 	port := flag.String("port", "8080", "its the port for the local server")

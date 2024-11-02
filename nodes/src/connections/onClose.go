@@ -1,6 +1,8 @@
 package connections
 
-import "log"
+import (
+	"log"
+)
 
 func OnClose(conn ConnectionID) {
 	delete(Conns, conn)

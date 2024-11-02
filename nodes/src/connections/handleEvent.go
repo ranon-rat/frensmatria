@@ -23,6 +23,8 @@ func HandleEventConns() {
 		if ComparingQ {
 
 			IncreaseLifeTime[ID] = make(chan struct{})
+			ComparingMap[ID] = make(map[string]int)
+			ComparingQs[ID] = true
 		}
 		// so this will be listening when we close the channel
 		go func() {
@@ -30,11 +32,6 @@ func HandleEventConns() {
 		}()
 		go func() {
 			for {
-				if ComparingQ {
-					ComparingMap[ID] = make(map[string]int)
-					ComparingQs[ID] = true
-				}
-
 				msg := <-msgChan
 				OnMessage(conn, msg, ID)
 			}
