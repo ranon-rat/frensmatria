@@ -20,7 +20,7 @@ func OnOpenComparing(conn ConnectionID) {
 	ComparingNodes++
 	conn.Connection.SendText(fmt.Sprintf("get %d", LastDate))
 
-	LifeTime(10, 30, 5, max(1, 5/len(Conns)), 1, IncreaseLifeTime[conn.ID])
+	LifeTime(10, 30, 5, max(1, 5/len(Conns)), 1, CIncreaseLifeTime[conn.ID])
 	OnEnding(conn.ID)
 }
 

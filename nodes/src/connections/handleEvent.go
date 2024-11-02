@@ -9,7 +9,7 @@ import (
 func HandleEventConns() {
 
 	for {
-		conn := <-ConnInfoChan
+		conn := <-ConnChan
 		ID := core.RandStringRunes(10)
 		cID := ConnectionID{
 			ID:         ID,
@@ -18,7 +18,7 @@ func HandleEventConns() {
 		Conns[cID] = true
 		Alive[ID] = make(chan struct{})
 		if ComparingQ {
-			IncreaseLifeTime[ID] = make(chan struct{})
+			CIncreaseLifeTime[ID] = make(chan struct{})
 			ComparingMap[ID] = make(map[string]int)
 			ComparingQs[ID] = true
 		}

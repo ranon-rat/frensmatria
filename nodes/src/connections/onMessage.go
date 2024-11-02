@@ -50,7 +50,7 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		if !ComparingQs[ID] {
 			return
 		}
-		IncreaseLifeTime[ID] <- struct{}{}
+		CIncreaseLifeTime[ID] <- struct{}{}
 		g := core.Base64_2GematriaSharing(information[1])
 		if g.Content == "" {
 			return

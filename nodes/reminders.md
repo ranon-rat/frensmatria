@@ -4,7 +4,6 @@ for running the sql script i will have to execute this
 cat init.sql|sqlite3 database.db
 ```
 
-
 when compiling i will have to set something like this
 
 ``` sh

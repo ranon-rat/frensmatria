@@ -72,6 +72,4 @@ Here's a list of completed and planned features:
 - Improvements to relay functionalities
 - Expanded system for adding and sharing node information
 
-
-
 [normie.webm](https://github.com/user-attachments/assets/b3b53278-b24c-48ba-8cdb-d1e5f1a99379)

@@ -16,7 +16,7 @@ for entering connections
 func dcHandler(d *webrtc.DataChannel) {
 
 	d.OnOpen(func() {
-		connections.ConnInfoChan <- d
+		connections.ConnChan <- d
 
 	})
 

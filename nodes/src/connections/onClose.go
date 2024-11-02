@@ -14,6 +14,6 @@ func OnClose(conn ConnectionID) {
 	if ComparingQ {
 		delete(ComparingMap, conn.ID)
 		delete(ComparingQs, conn.ID)
-		delete(IncreaseLifeTime, conn.ID)
+		delete(CIncreaseLifeTime, conn.ID)
 	}
 }
