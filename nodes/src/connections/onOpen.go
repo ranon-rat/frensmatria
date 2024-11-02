@@ -34,7 +34,7 @@ func SendAlive(conn ConnectionID) {
 func CloseIfNoResponse(conn ConnectionID) {
 	LifeTime(10, 30, 5, 4, 1, Alive[conn.ID])
 	conn.Connection.Close()
-	core.LogColor("disconnecting because of no response")
+	core.LogColor("disconnecting: reason timeout")
 	OnClose(conn)
 }
 
