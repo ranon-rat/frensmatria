@@ -19,7 +19,7 @@ func OnOpenComparing(conn ConnectionID) {
 	ComparingNodes++
 	conn.Connection.SendText(fmt.Sprintf("get %d", LastDate))
 
-	LifeTime(10, 50, 5, max(1, 10/len(Conns)), 1, IncreaseLifeTime[conn.ID])
+	LifeTime(10, 30, 5, max(1, 10/len(Conns)), 1, IncreaseLifeTime[conn.ID])
 	OnEnding(conn.ID)
 }
 func SendAlive(conn ConnectionID) {
@@ -42,7 +42,7 @@ func CloseIfNoResponse(conn ConnectionID) {
 // the maximum value
 // interval
 // addition of the liftime and the subtraction of the liftime
-func LifeTime(initialLifeTime, maxVal, checking, adding, substract int, check chan struct{}) {
+func LifeTime(initialLifeTime, maxVal, interval, adding, substract int, check chan struct{}) {
 	lifeTime := initialLifeTime
 	go func() {
 		for {
@@ -53,8 +53,7 @@ func LifeTime(initialLifeTime, maxVal, checking, adding, substract int, check ch
 		}
 	}()
 	for lifeTime > 0 {
-		time.Sleep(time.Second * time.Duration(checking))
+		time.Sleep(time.Second * time.Duration(interval))
 		lifeTime -= substract
 	}
-
 }
