@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 
+	"github.com/fatih/color"
 	"github.com/ranon-rat/frensmatria/nodes/src/SDPConn"
 	"github.com/ranon-rat/frensmatria/nodes/src/connections"
 	"github.com/ranon-rat/frensmatria/nodes/src/relayConn"
@@ -17,7 +18,11 @@ func Setup(relayAddrs, idNode string, update bool) {
 	relayConn.Setup(relayAddrs, idNode)
 	// this handles the events
 	connections.Setup(update)
-	fmt.Println("share this ID:", relayConn.GiveID())
+
+	c := color.New(color.Bold).AddRGB(0, 255, 0).SprintFunc()
+
+	fmt.Println(c("share this ID:"), relayConn.GiveID())
+
 }
 
 func main() {

@@ -15,7 +15,8 @@ func SendMessageEveryone(content channels.Message) {
 			continue
 		}
 		if err := v.Connection.SendText(content.Content); err != nil {
-			delete(Conns, v)
+			v.Connection.Close()
+
 			continue
 		}
 	}

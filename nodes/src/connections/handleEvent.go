@@ -16,20 +16,26 @@ func HandleEventConns() {
 			Connection: conn,
 		}
 		Conns[cID] = true
+		Alive[ID] = make(chan struct{})
 		if ComparingQ {
 			IncreaseLifeTime[ID] = make(chan struct{})
 			ComparingMap[ID] = make(map[string]int)
 			ComparingQs[ID] = true
 		}
-		go OnOpen(conn, ID)
-		conn.OnMessage(func(msg webrtc.DataChannelMessage) {
-			OnMessage(cID, msg)
-		})
-		conn.OnError(func(err error) {
-			OnClose(cID)
-		})
+		go OnOpen(cID)
+		go SendAlive(cID)
+		go CloseIfNoResponse(cID)
+		//go JustChecking(cID)
 		conn.OnClose(func() {
 			OnClose(cID)
 		})
+		conn.OnMessage(func(msg webrtc.DataChannelMessage) {
+			OnMessage(cID, msg)
+		})
+
+		conn.OnError(func(err error) {
+			OnClose(cID)
+		})
+
 	}
 }

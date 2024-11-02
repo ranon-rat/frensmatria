@@ -1,14 +1,14 @@
 package router
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/ranon-rat/frensmatria/nodes/src/controllers"
+	"github.com/ranon-rat/frensmatria/nodes/src/core"
 )
 
 func Setup(port string) {
-	log.Println("starting server")
+	core.LogColor("starting server")
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static", fs)) // basic files
 	http.HandleFunc("/", controllers.Index)

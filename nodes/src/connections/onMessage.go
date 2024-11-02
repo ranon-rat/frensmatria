@@ -2,7 +2,6 @@ package connections
 
 import (
 	"fmt"
-	"log"
 	"strconv"
 	"strings"
 
@@ -17,22 +16,24 @@ import (
 // compare base64json // this is just for sending, or receiving (if you receive this, you shouldnt share it with other nodes)
 // end (this is for the comparing stuf)
 // get dateTime // this is only for getting information
+// alive // its for checking that the connection its still up
+
 // new, compare, end, get, those are all
 
 // probably i will add something new for the messages
 func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
+
 	ID := conn.ID
+	Alive[ID] <- struct{}{}
 	information := strings.Split(string(msg.Data), " ")
-	if len(information) < 2 {
-		return
-	}
+
 	switch information[0] {
 	case "new":
 		g := core.Base64_2GematriaSharing(information[1])
 		if g.Content == "" {
 			return
 		}
-		log.Println(information[0], g.Content, g.Date)
+		core.LogColor(information[0], g.Content, g.Date)
 		if db.AddGematria(g.Content, g.Date) == nil {
 			channels.SendMessage(fmt.Sprintf("new %s", core.GematriaSharing2Base64(g)), ID)
 		}
@@ -41,9 +42,9 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		if date == 0 {
 			return
 		}
-		log.Println(information[0], date)
+		core.LogColor(information[0], date)
 		if db.GetAllGematria(conn.Connection, date) != nil {
-			OnClose(conn)
+			conn.Connection.Close()
 		}
 	case "compare":
 		if !ComparingQs[ID] {
@@ -55,13 +56,15 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		if g.Content == "" {
 			return
 		}
-		log.Println(information[0], g.Content, g.Date)
+		core.LogColor(information[0], g.Content, g.Date)
 		ComparingMap[ID][g.Content] = g.Date
 
 	case "end":
-		log.Println(information[0])
+		core.LogColor(information[0])
 		OnEnding(ID)
+
 	default:
+
 		return
 	}
 

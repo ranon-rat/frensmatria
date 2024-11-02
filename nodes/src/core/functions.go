@@ -6,9 +6,23 @@ import (
 	"fmt"
 	"math/rand"
 	"strings"
+	"time"
+
+	"github.com/fatih/color"
 )
 
 var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+func LogColor(input ...any) {
+	c := color.New(color.Bold).AddRGB(0, 255, 0).SprintFunc()
+	t := time.Now()
+
+	fmt.Println(append([]any{
+		c(fmt.Sprintf("%d/%02d/%02d %02d:%02d:%02d ",
+			t.Year(), t.Month(), t.Day(),
+			t.Hour(), t.Minute(), t.Second()))}, input...)...)
+
+}
 
 func RandStringRunes(n int) string {
 	b := make([]rune, n)
