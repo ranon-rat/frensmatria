@@ -2,9 +2,9 @@ package core
 
 // connection shit
 const (
-	Nothing   = 0
-	ConnectTo = 1
-	Confirm   = 2
+	Nothing   = iota
+	ConnectTo = iota
+	Confirm   = iota
 )
 
 // pagination shit
@@ -12,8 +12,8 @@ const LIMIT = 15
 
 // gematria shit
 const (
-	sumGematria     = 0
-	fractalGematria = 1
+	sumGematria     = iota
+	fractalGematria = iota
 )
 
 // gematria kind of shit
