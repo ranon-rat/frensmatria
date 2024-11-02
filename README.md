@@ -33,6 +33,8 @@ Here are the main parameters you can use to customize the execution:
 ```bash
 go run main.go -relay "localhost:9090" -node "<generated ID>" -port "6969" -not-update
 ```
+![image](https://github.com/user-attachments/assets/69b10aa2-a19b-47ed-951c-1bb07a9d80a8)
+
 
 This example runs the service on `localhost` at port 8080, using the generated ID and updating the database at startup.
 
