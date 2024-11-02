@@ -19,10 +19,6 @@ func Setup(relayAddrs, idNode string, update bool) {
 	// this handles the events
 	connections.Setup(update)
 
-	c := color.New(color.Bold).AddRGB(0, 255, 0).SprintFunc()
-
-	fmt.Println(c("share this ID:"), relayConn.GiveID())
-
 }
 
 func main() {
@@ -41,7 +37,10 @@ created by @tecnopsychosis
 	update := flag.Bool("not-update", false, "its for updating the db once the service starts")
 	flag.Parse()
 
-	go Setup(
+	Setup(
 		*relayAddrs, *idNode, !*update)
+	c := color.New(color.Bold).AddRGB(0, 255, 0).SprintFunc()
+
+	fmt.Println(c("share this ID:"), relayConn.GiveID())
 	router.Setup(*port)
 }
