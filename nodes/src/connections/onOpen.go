@@ -10,15 +10,21 @@ import (
 
 func OnOpen(conn ConnectionID) {
 	core.LogColor("New Connection")
-	if !ComparingQ {
+	if ComparingQ {
 		go OnOpenComparing(conn)
 	}
 	go SendAlive(conn) // with this we only say "hey, i am alive :D"
 	CloseIfNoResponse(conn)
 }
 func OnOpenComparing(conn ConnectionID) {
+
 	ComparingNodes++
-	conn.Connection.SendText(fmt.Sprintf("get %d", LastDate))
+	core.LogColor(color.New(color.FgGreen).Sprint("sending event:"), color.New(color.FgHiYellow).Sprint("get"))
+
+	if err := conn.Connection.SendText(fmt.Sprintf("get %d", LastDate)); err != nil {
+		conn.Connection.Close()
+		return
+	}
 
 	LifeTime(10, 30, 5, max(1, 5/len(Conns)), 1, CIncreaseLifeTime[conn.ID])
 	OnEnding(conn.ID)

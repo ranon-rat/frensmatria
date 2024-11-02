@@ -34,8 +34,10 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		if g.Content == "" {
 			return
 		}
-		core.LogColor(color.New(color.FgGreen).Sprint("new message:"), color.New(color.FgHiYellow).Sprint(information[0]), g.Content)
+		core.LogColor(color.New(color.FgGreen).Sprint("event:"), color.New(color.FgHiYellow).Sprint(information[0]), g.Content)
 		if db.AddGematria(g.Content, g.Date) == nil {
+			core.LogColor(color.New(color.FgGreen).Sprint("sending event:"), color.New(color.FgHiYellow).Sprint("new"), g.Content)
+
 			channels.SendMessage(fmt.Sprintf("new %s", core.GematriaSharing2Base64(g)), ID)
 		}
 	case "get":
@@ -43,7 +45,7 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		if date == 0 {
 			return
 		}
-		core.LogColor(color.New(color.FgGreen).Sprint("new message:"), color.New(color.FgHiYellow).Sprint(information[0]), time.Unix(int64(date), 0).Format(time.RFC3339))
+		core.LogColor(color.New(color.FgGreen).Sprint("event:"), color.New(color.FgHiYellow).Sprint(information[0]), time.Unix(int64(date), 0).Format(time.RFC3339))
 		if db.GetAllGematria(conn.Connection, date) != nil {
 			conn.Connection.Close()
 		}
@@ -56,10 +58,10 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		if g.Content == "" {
 			return
 		}
-		core.LogColor(color.New(color.FgGreen).Sprint("new message:"), color.New(color.FgHiYellow).Sprint(information[0]), g.Content)
+		core.LogColor(color.New(color.FgGreen).Sprint("event:"), color.New(color.FgHiYellow).Sprint(information[0]), g.Content)
 		ComparingMap[ID][g.Content] = g.Date
 	case "end":
-		core.LogColor(color.New(color.FgGreen).Sprint("new message:"), color.New(color.FgHiYellow).Sprint(information[0]))
+		core.LogColor(color.New(color.FgGreen).Sprint("event:"), color.New(color.FgHiYellow).Sprint(information[0]))
 		OnEnding(ID)
 	default:
 		return

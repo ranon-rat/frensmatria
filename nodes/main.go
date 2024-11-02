@@ -17,7 +17,6 @@ func Setup(relayAddrs, idNode string, update bool) {
 	// relay communication
 	relayConn.Setup(relayAddrs, idNode)
 	// this handles the events
-	connections.Setup(update)
 
 }
 
@@ -40,7 +39,9 @@ created by @tecnopsychosis(AQ 333)
 	Setup(
 		*relayAddrs, *idNode, !*update)
 	c := color.New(color.Bold).AddRGB(0, 255, 0).SprintFunc()
+	fmt.Printf("%s %s \n\n", c("share this ID:"), relayConn.GiveID())
 
-	fmt.Println(c("share this ID:"), relayConn.GiveID())
+	connections.Setup(!*update)
+
 	router.Setup(*port)
 }
