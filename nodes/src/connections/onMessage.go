@@ -16,8 +16,7 @@ import (
 // compare base64json // this is just for sending, or receiving (if you receive this, you shouldnt share it with other nodes)
 // end (this is for the comparing stuf)
 // get dateTime // this is only for getting information
-// alive // its for checking that the connection its still up
-
+// ... // its for checking that the connection its still up
 // new, compare, end, get, those are all
 
 // probably i will add something new for the messages

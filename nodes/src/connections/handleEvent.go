@@ -23,8 +23,7 @@ func HandleEventConns() {
 			ComparingQs[ID] = true
 		}
 		go OnOpen(cID)
-		go SendAlive(cID)
-		go CloseIfNoResponse(cID)
+
 		//go JustChecking(cID)
 		conn.OnClose(func() {
 			OnClose(cID)

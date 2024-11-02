@@ -10,8 +10,12 @@ import (
 func OnOpen(conn ConnectionID) {
 	core.LogColor("New Connection")
 	if !ComparingQ {
-		return
+		go OnOpenComparing(conn)
 	}
+	go SendAlive(conn)
+	CloseIfNoResponse(conn)
+}
+func OnOpenComparing(conn ConnectionID) {
 	ComparingNodes++
 	conn.Connection.SendText(fmt.Sprintf("get %d", LastDate))
 
