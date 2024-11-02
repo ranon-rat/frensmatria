@@ -20,7 +20,8 @@ func OnOpen(conn *webrtc.DataChannel, ID string) {
 	go func() {
 		for {
 			<-IncreaseLifeTime[ID]
-			lifeTime += 5
+			// i will just wait a little :D
+			lifeTime += max(1, 10/len(Conns))
 			lifeTime = min(lifeTime, 50)
 		}
 	}()

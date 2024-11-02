@@ -3,10 +3,7 @@ package connections
 func HandleEventConns() {
 
 	for {
-
 		connInfo := <-ConnInfoChan
-		closeChan := connInfo.CloseChan
-		msgChan := connInfo.MsgChan
 		conn := connInfo.Connection
 		ID := RandStringRunes(10)
 		cID := ConnectionID{
@@ -25,12 +22,12 @@ func HandleEventConns() {
 		}()
 		go func() {
 			for {
-				msg := <-msgChan
+				msg := <-connInfo.MsgChan
 				OnMessage(conn, msg, ID)
 			}
 		}()
 		go func() {
-			<-closeChan
+			<-connInfo.CloseChan
 			OnClose(cID)
 		}()
 

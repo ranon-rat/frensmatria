@@ -33,8 +33,9 @@ func CompareResults(compare map[string]map[string]int, currentDate int) {
 
 			dates := make(map[int]int)
 			newInput := false
+
+			// maybe i will add something for all the nodes to avoid adding things that are not popular
 			for _, n := range compare {
-				// que pasaria si hm bueno intentemos esto, luego voy a agregar algo para poder
 				if _, e := n[input]; !e {
 					newInput = true
 					continue
