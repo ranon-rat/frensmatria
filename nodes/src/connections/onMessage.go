@@ -54,9 +54,7 @@ func OnMessage(conn *webrtc.DataChannel, msg webrtc.DataChannelMessage, ID strin
 		ComparingMap[ID][g.Content] = g.Date
 
 	case "end":
-		// not finished yet, i still need to modify some other stuff for improving the system
 		OnEnding(ID)
-
 	default:
 		return
 	}
