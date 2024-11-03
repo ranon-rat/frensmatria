@@ -27,6 +27,7 @@ Here are the main parameters you can use to customize the execution:
 - **port**: Defines the local server port. The default is set to `6969`.
 
 - **not-update**: Controls whether the database should be updated when the service starts. By default it will update.
+- **http-server** i twill start an http server at the port that you defined
 
 #### Example Usage
 
