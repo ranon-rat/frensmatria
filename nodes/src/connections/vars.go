@@ -24,6 +24,7 @@ var (
 	Alive = make(map[string]chan struct{})
 )
 
+// this is for internal usage btw
 type ConnectionID struct {
 	Connection *webrtc.DataChannel
 	ID         string

@@ -34,6 +34,7 @@ created by @tecnopsychosis(AQ 333)
 	idNode := flag.String("node", "", "is just the id that the relay generats, use it to connect with someone else")
 	port := flag.String("port", "6969", "its the port for the local server")
 	update := flag.Bool("not-update", false, "its for updating the db once the service starts")
+	httpServer := flag.Bool("http-server", false, "it will start an http service")
 	flag.Parse()
 
 	Setup(
@@ -42,6 +43,8 @@ created by @tecnopsychosis(AQ 333)
 	fmt.Printf("%s %s \n\n", c("share this ID:"), relayConn.GiveID())
 
 	connections.Setup(!*update)
-
-	router.Setup(*port)
+	if *httpServer {
+		go router.Setup(*port)
+	}
+	select {}
 }
