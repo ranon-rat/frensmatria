@@ -33,7 +33,7 @@ created by @tecnopsychosis(AQ 333)
 	relayAddrs := flag.String("relay", "localhost:9090", "just connect to a relay so we can hole punch")
 	idNode := flag.String("node", "", "is just the id that the relay generats, use it to connect with someone else")
 	port := flag.String("port", "6969", "its the port for the local server")
-	update := flag.Bool("not-update", false, "its for updating the db once the service starts")
+	update := flag.Bool("update", false, "its for updating the db once the service starts")
 	httpServer := flag.Bool("http-server", false, "it will start an http service")
 	flag.Parse()
 
