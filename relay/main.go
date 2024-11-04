@@ -8,7 +8,9 @@ import (
 	"fmt"
 	"math/rand"
 	"net"
+	"time"
 
+	"github.com/fatih/color"
 	"github.com/ranon-rat/frensmatria/common"
 )
 
@@ -17,6 +19,15 @@ var (
 	connections = make(map[string]net.Conn)
 )
 
+func LogColor(input ...any) {
+	t := time.Now()
+
+	fmt.Println(append([]any{
+		color.New(color.Bold).AddRGB(0, 255, 0).Sprintf("[%d/%02d/%02d %02d:%02d:%02d]",
+			t.Year(), t.Month(), t.Day(),
+			t.Hour(), t.Minute(), t.Second())}, input...)...)
+
+}
 func RandomConnectionsID() (nodes []string) {
 	existent := make(map[string]bool)
 	for len(nodes) < min(len(connections), 10) {
@@ -36,7 +47,7 @@ func RandomConnectionsID() (nodes []string) {
 	}
 	return nodes
 }
-func manageConnections(c net.Conn) {
+func manageConnections(c net.Conn, password string) {
 
 	defer c.Close()
 	var initialize common.WantConnect
@@ -46,9 +57,11 @@ func manageConnections(c net.Conn) {
 
 		return
 	}
+	if initialize.Password != password {
+		return
+	}
 
 	ID := common.HashSHA256(initialize.SDPOffer)
-	fmt.Println(ID)
 	defer delete(connections, ID)
 	defer delete(addresses, ID)
 
@@ -92,6 +105,7 @@ func manageConnections(c net.Conn) {
 func main() {
 
 	port := flag.String("port", "9090", "its the port for the local server")
+	password := flag.String("password", "", "its just the password for connecting to the relay")
 	flag.Parse()
 
 	server, err := net.Listen("tcp", fmt.Sprintf("localhost:%s", *port))
@@ -99,8 +113,18 @@ func main() {
 		panic(err)
 	}
 	defer server.Close()
-	fmt.Println("starting server")
-	fmt.Printf("you can connect via %s:%s\n", "localhost", *port)
+
+	fmt.Println(color.New(color.Bold).AddRGB(100, 0, 255).SprintFunc()(
+		`
+     ┏┓               •  
+     ┣ ┏┓┏┓┏┓┏┏┳┓┏┓╋┏┓┓┏┓
+     ┻ ┛ ┗ ┛┗┛┛┗┗┗┻┗┛ ┗┗┻
+
+created by @tecnopsychosis(AQ 333)
+
+`))
+	LogColor("starting server")
+	LogColor(fmt.Sprintf("you can connect via %s:%s\n", "localhost", *port))
 
 	for {
 
@@ -109,8 +133,8 @@ func main() {
 			continue
 		}
 
-		go manageConnections(conn)
-		fmt.Println("new connection", conn.RemoteAddr())
+		go manageConnections(conn, *password)
+		LogColor("new connection")
 
 	}
 }

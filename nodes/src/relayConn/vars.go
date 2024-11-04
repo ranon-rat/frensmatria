@@ -17,6 +17,7 @@ var (
 	ReaderChan    = make(chan *json.Decoder)
 	IDchan        = make(chan string)
 	IDConnectChan = make(chan string)
+	Password      = ""
 )
 
 // this is just for setting the variables

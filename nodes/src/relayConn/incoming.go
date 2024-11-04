@@ -23,6 +23,7 @@ func RelayNewConns() {
 
 		}
 		IDchan <- res.ID
+		channels.HowManyNodes <- len(res.NodesID)
 
 	}
 	for {
@@ -49,6 +50,7 @@ func ActualizeSDP() {
 		json.NewEncoder(rConn).Encode(common.WantConnect{
 			SDPOffer: SDP,
 			IDNode:   "",
+			Password: Password,
 		})
 		// with this i just manage other stuff
 	}

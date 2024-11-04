@@ -21,7 +21,8 @@ var (
 
 	LastDate = 0
 	// just disconnect it hasnt receive anything in a lot of time
-	Alive = make(map[string]chan struct{})
+	Alive         = make(map[string]chan struct{})
+	ExpectedNodes = 0
 )
 
 // this is for internal usage btw

@@ -36,7 +36,7 @@ func SendAlive(conn ConnectionID) {
 			conn.Connection.Close()
 			break
 		}
-		time.Sleep(time.Second * 10)
+		time.Sleep(time.Second * 5)
 	}
 }
 

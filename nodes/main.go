@@ -11,11 +11,11 @@ import (
 	"github.com/ranon-rat/frensmatria/nodes/src/router"
 )
 
-func Setup(relayAddrs, idNode string, update bool) {
+func Setup(relayAddrs, idNode, password string, update bool) {
 	// sdp connections
 	SDPConn.Setup()
 	// relay communication
-	relayConn.Setup(relayAddrs, idNode)
+	relayConn.Setup(relayAddrs, idNode, password)
 	// this handles the events
 
 }
@@ -36,10 +36,11 @@ created by @tecnopsychosis(AQ 333)
 	port := flag.String("port", "6969", "its the port for the local server")
 	update := flag.Bool("update", false, "its for updating the db once the service starts")
 	httpServer := flag.Bool("http-server", false, "it will start an http service")
+	password := flag.String("password", "", "password for connecting with the relay")
 	flag.Parse()
 
 	Setup(
-		*relayAddrs, *idNode, *update)
+		*relayAddrs, *idNode, *password, *update)
 	c := color.New(color.Bold).AddRGB(0, 255, 0).SprintFunc()
 	fmt.Printf("%s %s \n\n", c("share this ID:"), relayConn.GiveID())
 

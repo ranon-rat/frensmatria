@@ -7,7 +7,6 @@ import (
 
 // we will receive things through the data channel when its opened
 func HandleEventConns() {
-
 	for {
 		conn := <-ConnChan
 		ID := core.RandStringRunes(10)
@@ -23,14 +22,13 @@ func HandleEventConns() {
 			ComparingQs[ID] = true
 		}
 		go OnOpen(cID)
-
-		conn.OnClose(func() {
+		go conn.OnClose(func() {
 			OnClose(cID)
 		})
-		conn.OnMessage(func(msg webrtc.DataChannelMessage) {
+		go conn.OnMessage(func(msg webrtc.DataChannelMessage) {
 			OnMessage(cID, msg)
 		})
-		conn.OnError(func(err error) {
+		go conn.OnError(func(err error) {
 			OnClose(cID)
 		})
 

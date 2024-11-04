@@ -21,6 +21,7 @@ var (
 	// end (this is for the comparing stuf)
 	// get dateTime // this is only for getting information
 	ConnectionComm = make(chan Message)
+	HowManyNodes   = make(chan int)
 )
 
 type Message struct {

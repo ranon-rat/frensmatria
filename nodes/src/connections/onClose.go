@@ -6,9 +6,11 @@ import (
 )
 
 func OnClose(conn ConnectionID) {
+
 	if !Conns[conn] {
 		return
 	}
+	ExpectedNodes--
 	core.LogColor(color.New(color.Bold, color.FgRed).Sprint("Closing Connection"))
 	delete(Conns, conn)
 	if ComparingQ {

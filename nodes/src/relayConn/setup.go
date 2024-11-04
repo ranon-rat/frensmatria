@@ -19,9 +19,11 @@ func Initialize(relayAddrs string) {
 
 }
 
-func Setup(relayAddrs, idNode string) {
+func Setup(relayAddrs, idNode, password string) {
+	Password = password
 	// start the server
 	Initialize(relayAddrs)
+
 	// this is just for controlling other stuff
 	go ActualizeSDP()
 	go RelayNewConns()

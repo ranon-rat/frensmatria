@@ -12,6 +12,7 @@ type IDResponse struct {
 }
 
 type WantConnect struct {
+	Password string `json:"password"`
 	IDNode   string `json:"idNode"`
 	SDPOffer string `json:"SDP"` // if this is empty, that means that i shouldnt send it to the IDNode
 }
