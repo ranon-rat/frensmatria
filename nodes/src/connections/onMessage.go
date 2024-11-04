@@ -82,7 +82,8 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		MsgCache[information[1]] = true
 		channels.SendMessage(fmt.Sprintf("message %s", core.Object2Base64(msg)), ID)
 		controllers.Message <- msg
-
+		time.Sleep(time.Minute)
+		delete(MsgCache, information[1])
 	default:
 		return
 	}
