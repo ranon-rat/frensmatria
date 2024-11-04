@@ -18,7 +18,12 @@ func RelayNewConns() {
 		if rReader.Decode(&res) != nil {
 			panic("relay problems")
 		}
+		for _, id := range res.NodesID {
+			go ConnectTo(id)
+
+		}
 		IDchan <- res.ID
+
 	}
 	for {
 		var body common.Initial

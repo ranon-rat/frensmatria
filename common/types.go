@@ -7,7 +7,8 @@ type Initial struct {
 
 // there
 type IDResponse struct {
-	ID string `json:"id"`
+	ID      string   `json:"id"`
+	NodesID []string `json:"nodes"`
 }
 
 type WantConnect struct {

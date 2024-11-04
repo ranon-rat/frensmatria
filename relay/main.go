@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"math/rand"
 	"net"
 
 	"github.com/ranon-rat/frensmatria/common"
@@ -16,6 +17,25 @@ var (
 	connections = make(map[string]net.Conn)
 )
 
+func RandomConnectionsID() (nodes []string) {
+	existent := make(map[string]bool)
+	for len(nodes) < min(len(connections), 10) {
+		for id := range connections {
+			if rand.Float32() < max(0.5/float32(len(connections)), 0.1) {
+				if existent[id] {
+					continue
+
+				}
+				nodes = append(nodes, id)
+				existent[id] = true
+				for len(nodes) >= min(len(connections), 10) {
+					return nodes
+				}
+			}
+		}
+	}
+	return nodes
+}
 func manageConnections(c net.Conn) {
 
 	defer c.Close()
@@ -32,7 +52,7 @@ func manageConnections(c net.Conn) {
 	defer delete(connections, ID)
 	defer delete(addresses, ID)
 
-	json.NewEncoder(c).Encode(common.IDResponse{ID: ID})
+	json.NewEncoder(c).Encode(common.IDResponse{ID: ID, NodesID: RandomConnectionsID()})
 
 	connections[ID] = c
 	addresses[ID] = initialize.SDPOffer

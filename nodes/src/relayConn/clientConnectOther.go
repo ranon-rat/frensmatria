@@ -8,12 +8,15 @@ import (
 )
 
 func ConnectTo(id string) {
-	json.NewEncoder(rConn).Encode(common.WantConnect{
-		IDNode: id,
-	})
+	IDConnectChan <- id
 }
-func SendOffering(id string) {
+func SendOffering() {
 	for {
+		id := <-IDConnectChan
+		json.NewEncoder(rConn).Encode(common.WantConnect{
+			IDNode: id,
+		})
+
 		SDP := <-channels.SDPChanAnswer
 		json.NewEncoder(rConn).Encode(common.WantConnect{
 			SDPOffer: SDP,

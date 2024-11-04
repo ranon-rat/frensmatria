@@ -13,9 +13,10 @@ var (
 	// node id
 	nID string
 	// channels for initializing our SDPConn
-	ConnChan   = make(chan net.Conn)
-	ReaderChan = make(chan *json.Decoder)
-	IDchan     = make(chan string)
+	ConnChan      = make(chan net.Conn)
+	ReaderChan    = make(chan *json.Decoder)
+	IDchan        = make(chan string)
+	IDConnectChan = make(chan string)
 )
 
 // this is just for setting the variables

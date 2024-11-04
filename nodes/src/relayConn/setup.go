@@ -29,9 +29,11 @@ func Setup(relayAddrs, idNode string) {
 	nID = <-IDchan
 	// this is only when our node is a client :D
 	if idNode != "" {
+		IDConnectChan <- idNode
+
 		ConnectTo(idNode)
-		go SendOffering(idNode)
 
 	}
+	go SendOffering()
 
 }
