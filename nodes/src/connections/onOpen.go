@@ -9,7 +9,7 @@ import (
 )
 
 func OnOpen(conn ConnectionID) {
-	core.LogColor("New Connection")
+	core.LogColor("New Connection", len(Conns))
 	if ComparingQ {
 		go OnOpenComparing(conn)
 	}
