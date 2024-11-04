@@ -33,7 +33,7 @@ go run main.go -relay "localhost:9090"   -update -http-server 6969
 ![image](https://github.com/user-attachments/assets/69b10aa2-a19b-47ed-951c-1bb07a9d80a8)
 
 
-This example runs the service on `localhost` at port 8080, using the generated ID and updating the database at startup.
+This example runs the service on `localhost` at port 6969, using the generated ID and updating the database at startup.
 
 ## Key Features
 
