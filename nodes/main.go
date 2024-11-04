@@ -45,7 +45,8 @@ created by @tecnopsychosis(AQ 333)
 	Setup(
 		*relayAddrs, *idNode, *password, *update)
 	c := color.New(color.Bold).AddRGB(0, 255, 0).SprintFunc()
-	fmt.Printf("%s %s \n\n", c("share this ID:"), relayConn.GiveID())
+	fmt.Printf("%s %s \n", c("share this ID:"), relayConn.GiveID())
+	fmt.Printf("%s %s \n\n", c("username:"), core.Username)
 
 	connections.Setup(*update)
 	if *port != 0 {

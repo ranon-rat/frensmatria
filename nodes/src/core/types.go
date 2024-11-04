@@ -27,5 +27,5 @@ type GematriaSharing struct {
 type Messages struct {
 	Content   string `json:"content"`
 	Timestamp int    `json:"timestamp"`
-	Author    string `json:"author"`
+	Username  string `json:"username"`
 }

@@ -61,7 +61,6 @@
 
                 const timestamp = document.createElement('div');
                 timestamp.className = 'timestamp';
-                timestamp.textContent = new Date(message.timestamp || Date.now()).toLocaleTimeString();
 
                 messageDiv.appendChild(username);
                 messageDiv.appendChild(content);
@@ -97,7 +96,6 @@
 
                 if (ws && ws.readyState === WebSocket.OPEN) {
                     ws.send(JSON.stringify(message));
-                    addMessage(message, true);
                 } else {
                     addSystemMessage('Unable to send message: Not connected');
                 }
