@@ -1,4 +1,4 @@
-# Frensmatria
+# 【F⃤R⃤E⃤N⃤S⃤M⃤A⃤T⃤R⃤I⃤A】
 
 Welcome to **Frensmatria** – a peer-to-peer (P2P) network dedicated to exploring gematria knowledge through collaborative nodes and a unified private relay system.
 
