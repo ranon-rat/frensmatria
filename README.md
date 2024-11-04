@@ -27,7 +27,7 @@ Here are the main parameters you can use to customize the execution:
 #### Example Usage
 
 ```bash
-go run main.go -relay "localhost:9090" -node "<generated ID>"  -not-update -http-server 6969
+go run main.go -relay "localhost:9090"   -update -http-server 6969
 ```
 
 ![image](https://github.com/user-attachments/assets/69b10aa2-a19b-47ed-951c-1bb07a9d80a8)
