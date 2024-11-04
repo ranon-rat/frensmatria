@@ -1,6 +1,7 @@
 package connections
 
 import (
+	"fmt"
 
 	"github.com/ranon-rat/frensmatria/nodes/src/core/channels"
 )
@@ -14,6 +15,7 @@ func SendMessages() {
 				continue
 			}
 			if err := v.Connection.SendText(content.Content); err != nil {
+				fmt.Println(err)
 				v.Connection.Close()
 
 				continue
