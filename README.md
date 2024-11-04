@@ -1,6 +1,6 @@
 # Frensmatria
 
-Welcome to **Frensmatria** – a peer-to-peer (P2P) network dedicated to exploring and expanding gematria knowledge through collaborative nodes and a unified relay system.
+Welcome to **Frensmatria** – a peer-to-peer (P2P) network dedicated to exploring gematria knowledge through collaborative nodes and a unified private relay system.
 
 ![Gematria Lookup](images/lookup.png)
 
