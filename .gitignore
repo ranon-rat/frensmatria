@@ -1,0 +1,3 @@
+nodes/*.exe
+nodes/*.exe~
+nodes/db/database.db
