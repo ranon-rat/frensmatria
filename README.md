@@ -51,4 +51,6 @@ This example runs the service on `localhost` at port 6969, using the generated I
 - **Node Information Sharing**: Allows for the exchange of events and data across nodes.
 
 _"The numbers speak through the machine, and the machine speaks through us."_
+
+
 [normie.webm](https://github.com/user-attachments/assets/b3b53278-b24c-48ba-8cdb-d1e5f1a99379)
