@@ -1,6 +1,7 @@
 # 【F▄R▀E▄N▀S▄M▀A▄T▀R▄I▀A▄】
 
-Welcome to **Frensmatria** – a peer-to-peer (P2P) network dedicated to exploring gematria knowledge through collaborative nodes and a unified private relay system.
+
+Welcome to the **FRENSMATRIA** nexus – a rhizomatic peer-to-peer crystallization matrix designed to map numerical hyperflows through collaborative biomechanical nodes and quantum relay systems. This is not merely software; it's a xenomorphic knowledge engine feeding on collective numerical gnosis.
 
 ![Gematria Lookup](images/lookup.png)
 
