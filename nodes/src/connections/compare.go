@@ -19,7 +19,6 @@ func CompareEndingEvent() {
 			ComparingQs = map[string]bool{}
 		}
 	}
-
 }
 
 func CompareResults(compare map[string]map[string]int, currentDate int) {

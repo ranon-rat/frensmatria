@@ -11,11 +11,13 @@ func OnClose(conn ConnectionID) {
 		return
 	}
 	ExpectedNodes--
-	core.LogColor(color.New(color.Bold, color.FgRed).Sprint("Closing Connection"), len(Conns))
+	ConnectedNodes--
 	delete(Conns, conn)
 	if ComparingQ {
 		delete(ComparingMap, conn.ID)
 		delete(ComparingQs, conn.ID)
 		delete(CIncreaseLifeTime, conn.ID)
 	}
+	core.LogColor(color.New(color.Bold, color.FgRed).Sprint("Closing Connection"), len(Conns))
+
 }

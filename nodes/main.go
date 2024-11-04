@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"strconv"
 
 	"github.com/fatih/color"
 	"github.com/ranon-rat/frensmatria/nodes/src/SDPConn"
@@ -33,9 +34,8 @@ created by @tecnopsychosis(AQ 333)
 
 	relayAddrs := flag.String("relay", "localhost:9090", "just connect to a relay so we can hole punch")
 	idNode := flag.String("node", "", "is just the id that the relay generats, use it to connect with someone else")
-	port := flag.String("port", "6969", "its the port for the local server")
+	port := flag.Int("http-server", 0, "its the port for the local server")
 	update := flag.Bool("update", false, "its for updating the db once the service starts")
-	httpServer := flag.Bool("http-server", false, "it will start an http service")
 	password := flag.String("password", "", "password for connecting with the relay")
 	flag.Parse()
 
@@ -45,8 +45,8 @@ created by @tecnopsychosis(AQ 333)
 	fmt.Printf("%s %s \n\n", c("share this ID:"), relayConn.GiveID())
 
 	connections.Setup(*update)
-	if *httpServer {
-		go router.Setup(*port)
+	if *port != 0 {
+		go router.Setup(strconv.Itoa(*port))
 	}
 	select {}
 }

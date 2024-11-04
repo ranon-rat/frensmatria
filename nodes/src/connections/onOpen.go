@@ -9,12 +9,12 @@ import (
 )
 
 func OnOpen(conn ConnectionID) {
-	ConnectedNodes++
 	core.LogColor("New Connection", len(Conns))
 	go SendAlive(conn) // with this we only say "hey, i am alive :D"
 	if ComparingQ {
 		go OnOpenComparing(conn)
 	}
+	ConnectedNodes++
 	CloseIfNoResponse(conn)
 }
 func OnOpenComparing(conn ConnectionID) {

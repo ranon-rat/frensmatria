@@ -7,6 +7,7 @@ import (
 
 // we will receive things through the data channel when its opened
 func HandleEventConns() {
+
 	for {
 		conn := <-ConnChan
 		ID := core.RandStringRunes(10)
