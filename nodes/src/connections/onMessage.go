@@ -71,17 +71,20 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		core.LogColor(color.New(color.FgGreen).Sprint("event:"), color.New(color.FgHiYellow).Sprint(information[0]), g.Content)
 		ComparingMap[ID][g.Content] = g.Date
 	case "message":
+		msg := core.Base64_2Object[core.Messages](information[1])
+		core.LogColor(color.New(color.FgGreen).Sprint("event:"), color.New(color.FgHiYellow).Sprint(information[0]), msg.Content)
+
 		if MsgCache[information[1]] {
 			return
 		}
-		msg := core.Base64_2Object[core.Messages](information[1])
-		core.LogColor(color.New(color.FgGreen).Sprint("event:"), color.New(color.FgHiYellow).Sprint(information[0]), msg.Content)
-		controllers.Message <- msg
-		channels.SendMessage(fmt.Sprintf("message %s", information[1]), ID)
 		MsgCache[information[1]] = true
-		time.Sleep(time.Minute * 5)
-		delete(MsgCache, information[1])
+		channels.SendMessage(fmt.Sprintf("message %s", core.Object2Base64(msg)), ID)
+		controllers.Message <- msg
 
+		go func() {
+			time.Sleep(time.Minute * 5)
+			delete(MsgCache, information[1])
+		}()
 	default:
 		return
 	}
