@@ -1,4 +1,4 @@
-# 【F⃤R⃤E⃤N⃤S⃤M⃤A⃤T⃤R⃤I⃤A】
+# 【F▄R▀E▄N▀S▄M▀A▄T▀R▄I▀A▄】
 
 Welcome to **Frensmatria** – a peer-to-peer (P2P) network dedicated to exploring gematria knowledge through collaborative nodes and a unified private relay system.
 
@@ -16,18 +16,18 @@ To begin using the P2P tools, run the `main.go` file located in the `relay` fold
 go run main.go
 ```
 
-#### Commands and Configuration
-
-Here are the main parameters you can use to customize the execution:
+#### 【COMMANDS】
+Configure your node's behavior through these parameters:
 
 - **relay**: Specifies the address of the relay to connect to. The default setting is `localhost:9090`.
-- **-update**: Controls whether the database should be updated when the service starts. By default it will not update.
+- **update**: Controls whether the database should be updated when the service starts. By default it will not update.
 - **http-server** it will start an http server at the port that you defined
 - **username** it will define a username. By default it will just generate a random username.
-#### Example Usage
+
+#### 〔DEPLOYMENT EXAMPLE〕
 
 ```bash
-go run main.go -relay "localhost:9090"   -update -http-server 6969
+go run main.go -relay "localhost:9090" -update -http-server 6969 # instantiate full spectrum node
 ```
 
 ![image](https://github.com/user-attachments/assets/69b10aa2-a19b-47ed-951c-1bb07a9d80a8)
