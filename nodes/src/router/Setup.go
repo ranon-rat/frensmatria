@@ -14,6 +14,8 @@ func Setup(port string) {
 	http.HandleFunc("/", controllers.Index)
 	http.HandleFunc("/upload", controllers.Upload)
 	http.HandleFunc("/recent", controllers.Recent)
+	http.HandleFunc("/ws", controllers.SetupWebsocket)
+	http.HandleFunc("/chat", controllers.Chat)
 
 	// so this is a setup
 	controllers.SetupTemplate()

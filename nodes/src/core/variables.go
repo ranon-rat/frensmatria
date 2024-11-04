@@ -1,5 +1,13 @@
 package core
 
+var (
+	Username = ""
+)
+
+func SetUsername(u string) {
+	Username = u
+}
+
 // pagination shit
 const LIMIT = 15
 

@@ -56,7 +56,7 @@ func GetAllGematria(conn *webrtc.DataChannel, date int) (err error) {
 	for rows.Next() {
 		g := core.GematriaSharing{}
 		rows.Scan(&g.Content, &g.Date)
-		err = conn.SendText(fmt.Sprintf("compare %s", core.GematriaSharing2Base64(g)))
+		err = conn.SendText(fmt.Sprintf("compare %s", core.Object2Base64(g)))
 		if err != nil {
 			return
 		}

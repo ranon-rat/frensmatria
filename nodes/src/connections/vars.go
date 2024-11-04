@@ -24,6 +24,10 @@ var (
 	// just disconnect it hasnt receive anything in a lot of time
 	ExpectedNodes  = 0
 	ConnectedNodes = 0
+
+	//msg shit
+
+	MsgCache = make(map[string]bool)
 )
 
 // this is for internal usage btw

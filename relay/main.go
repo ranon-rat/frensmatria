@@ -134,7 +134,7 @@ created by @tecnopsychosis(AQ 333)
 		}
 
 		go manageConnections(conn, *password)
-		LogColor("new connection")
+		LogColor("new connection", len(connections))
 
 	}
 }

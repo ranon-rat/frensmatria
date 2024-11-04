@@ -1,6 +1,16 @@
 package controllers
 
-import "github.com/ranon-rat/frensmatria/nodes/src/core"
+import (
+	"github.com/gorilla/websocket"
+	"github.com/ranon-rat/frensmatria/nodes/src/core"
+)
+
+var (
+	upgrade = websocket.Upgrader{}
+	clients = make(map[*websocket.Conn]bool)
+	//Message[Name of channel] message json structure
+	Message = make(chan core.Messages)
+)
 
 type Pagination struct {
 	CurrentPage int

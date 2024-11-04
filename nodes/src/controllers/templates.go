@@ -11,6 +11,7 @@ var (
 	templates *template.Template
 	indexT    = "index.html"
 	recentT   = "recent.html"
+	chatT     = "chat.html"
 )
 
 // this is important for loading the templates

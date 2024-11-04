@@ -176,3 +176,74 @@ nav ul li a:hover {
 .pagination a:hover:not(.active) {
     background-color: var(--secondary-color);
 }
+
+#chat-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-y: auto;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 8px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.message.sent {
+    background-color: var(--accent-color);
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.message.received {
+    background-color: var(--border-color);
+    align-self: flex-start;
+}
+
+.message-form {
+    display: flex;
+    gap: 10px;
+}
+
+.message-input {
+    flex-grow: 1;
+    padding: 12px;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 4px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.send-button {
+    padding: 12px 24px;
+    background-color: var(--accent-color);
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.send-button:hover {
+    background-color: #234b8a;
+}
+
+.timestamp {
+    font-size: 0.8em;
+    color: rgba(160, 176, 192, 0.7);
+    margin-top: 4px;
+}
+
+.username {
+    font-weight: bold;
+    margin-bottom: 4px;
+}

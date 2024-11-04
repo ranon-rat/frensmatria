@@ -3,11 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
+	"math/rand"
 	"strconv"
 
 	"github.com/fatih/color"
 	"github.com/ranon-rat/frensmatria/nodes/src/SDPConn"
 	"github.com/ranon-rat/frensmatria/nodes/src/connections"
+	"github.com/ranon-rat/frensmatria/nodes/src/core"
 	"github.com/ranon-rat/frensmatria/nodes/src/relayConn"
 	"github.com/ranon-rat/frensmatria/nodes/src/router"
 )
@@ -37,8 +39,9 @@ created by @tecnopsychosis(AQ 333)
 	port := flag.Int("http-server", 0, "its the port for the local server")
 	update := flag.Bool("update", false, "its for updating the db once the service starts")
 	password := flag.String("password", "", "password for connecting with the relay")
+	username := flag.String("username", "anonymous"+strconv.Itoa(rand.Intn(100)), "")
 	flag.Parse()
-
+	core.SetUsername(*username)
 	Setup(
 		*relayAddrs, *idNode, *password, *update)
 	c := color.New(color.Bold).AddRGB(0, 255, 0).SprintFunc()

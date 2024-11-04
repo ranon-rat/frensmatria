@@ -23,3 +23,9 @@ type GematriaSharing struct {
 	Content string `json:"content"`
 	Date    int    `json:"date"`
 }
+
+type Messages struct {
+	Content   string `json:"content"`
+	Timestamp int    `json:"timestamp"`
+	Author    string `json:"author"`
+}

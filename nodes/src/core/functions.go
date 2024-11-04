@@ -31,12 +31,12 @@ func RandStringRunes(n int) string {
 	return string(b)
 }
 
-func GematriaSharing2Base64(g GematriaSharing) string {
+func Object2Base64(g any) string {
 	b, _ := json.Marshal(g)
 	return base64.RawStdEncoding.EncodeToString(b)
 }
-func Base64_2GematriaSharing(b string) GematriaSharing {
-	var g GematriaSharing
+func Base64_2Object[T any](b string) T {
+	var g T
 	d, _ := base64.RawStdEncoding.DecodeString(b)
 	json.Unmarshal(d, &g)
 	return g

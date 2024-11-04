@@ -21,7 +21,7 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 		Date:    int(time.Now().Unix()),
 	}
 	if db.AddGematria(g.Content, g.Date) == nil {
-		channels.SendMessage(fmt.Sprintf("new %s", core.GematriaSharing2Base64(g)), "")
+		channels.SendMessage(fmt.Sprintf("new %s", core.Object2Base64(g)), "")
 	}
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
