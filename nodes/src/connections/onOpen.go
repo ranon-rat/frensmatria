@@ -36,12 +36,12 @@ func SendAlive(conn ConnectionID) {
 			conn.Connection.Close()
 			break
 		}
-		time.Sleep(time.Second * 15)
+		time.Sleep(time.Second * 10)
 	}
 }
 
 func CloseIfNoResponse(conn ConnectionID) {
-	LifeTime(10, 30, 5, 5, 1, Alive[conn.ID])
+	LifeTime(10, 30, 5, 10, 1, Alive[conn.ID])
 	conn.Connection.Close()
 
 	core.LogColor("disconnecting:", color.New(color.Bold, color.FgRed).Sprint("reason timeout"))
