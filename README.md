@@ -50,18 +50,5 @@ This example runs the service on `localhost` at port 6969, using the generated I
 - **Database Integration**: Stores gematria results for future access.
 - **Node Information Sharing**: Allows for the exchange of events and data across nodes.
 
-## Roadmap
-
-Here's a list of completed and planned features:
-
-- [x] **Node Communication**
-- [x] **Relay for SDP Sharing**
-- [x] **Multi-Connection Management**
-- [x] **Event Handler**
-- [x] **Gematria Calculations** (Synx and Alphanumeric Qabbalah)
-- [x] **Web Interface** (for calculating and viewing gematria results)
-- [x] **Simple Chat** *(under consideration; may be removed due to some weird errors)*
-- [x] **Database Integration**
-
-
+_"The numbers speak through the machine, and the machine speaks through us."_
 [normie.webm](https://github.com/user-attachments/assets/b3b53278-b24c-48ba-8cdb-d1e5f1a99379)
