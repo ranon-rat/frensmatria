@@ -18,8 +18,9 @@ import (
 // compare base64json // this is just for sending, or receiving (if you receive this, you shouldnt share it with other nodes)
 // end (this is for the comparing stuf)
 // get dateTime // this is only for getting information
+// message
 // ... // its for checking that the connection its still up
-// new, compare, end, get, those are all
+// new, compare, end, get,message those are all
 
 // probably i will add something new for the messages
 func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
@@ -63,6 +64,8 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 	case "end":
 		core.LogColor(color.New(color.FgGreen).Sprint("event:"), color.New(color.FgHiYellow).Sprint(information[0]))
 		OnEnding(ID)
+	case "message":
+		fmt.Println(information[1])
 	default:
 		return
 	}

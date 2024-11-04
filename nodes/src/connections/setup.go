@@ -12,8 +12,9 @@ func Setup(update bool) {
 		ComparingQ = true
 		go func() {
 			for {
-				if ComparingNodes >= ExpectedNodes {
+				if ConnectedNodes >= ExpectedNodes {
 					CompareEndingEvent()
+					return
 				}
 			}
 		}()
