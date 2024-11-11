@@ -34,7 +34,7 @@ created by @tecnopsychosis(AQ 333)
 
 `)) // tmplr ascii art on https://patorjk.com/
 
-	relayAddrs := flag.String("relay", "localhost:9090", "just connect to a relay so we can hole punch")
+	relayAddrs := flag.String("relay", "", "just connect to a relay so we can hole punch")
 	idNode := flag.String("node", "", "is just the id that the relay generats, use it to connect with someone else")
 	port := flag.Int("http-server", 0, "its the port for the local server")
 	update := flag.Bool("update", false, "its for updating the db once the service starts")
@@ -42,12 +42,17 @@ created by @tecnopsychosis(AQ 333)
 	username := flag.String("username", "anonymous"+strconv.Itoa(rand.Intn(100)), "")
 	flag.Parse()
 	core.SetUsername(*username)
-	Setup(
-		*relayAddrs, *idNode, *password, *update)
-	c := color.New(color.Bold).AddRGB(0, 255, 0).SprintFunc()
-	fmt.Printf("%s %s \n", c("share this ID:"), relayConn.GiveID())
-	fmt.Printf("%s %s \n\n", c("username:"), core.Username)
 
+	
+	if *relayAddrs!=""{
+		// set connection stuff
+		Setup(
+		*relayAddrs, *idNode, *password, *update)
+		// just the rest
+		c := color.New(color.Bold).AddRGB(0, 255, 0).SprintFunc()
+		fmt.Printf("%s %s \n", c("share this ID:"), relayConn.GiveID())
+		fmt.Printf("%s %s \n\n", c("username:"), core.Username)
+	}
 	connections.Setup(*update)
 	if *port != 0 {
 		go router.Setup(strconv.Itoa(*port))
