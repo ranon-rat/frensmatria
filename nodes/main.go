@@ -36,7 +36,7 @@ created by @tecnopsychosis(AQ 333)
 
 	relayAddrs := flag.String("relay", "", "just connect to a relay so we can hole punch")
 	idNode := flag.String("node", "", "is just the id that the relay generats, use it to connect with someone else")
-	port := flag.Int("http-server", 0, "its the port for the local server")
+	port := flag.Int("http", 0, "its the port for the local server")
 	update := flag.Bool("update", false, "its for updating the db once the service starts")
 	password := flag.String("password", "", "password for connecting with the relay")
 	username := flag.String("username", "anonymous"+strconv.Itoa(rand.Intn(100)), "")

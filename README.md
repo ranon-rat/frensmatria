@@ -24,14 +24,14 @@ Configure your node's behavior through these parameters:
 
 - **update**: Controls whether the database should be updated when the service starts. By default it will not update.
 >>>>>>> 4495c6bf39883f9412fdc96478da71bb8f8e1e6f
-- **http-server** it will start an http server at the port that you defined
+- **http** it will start an http server at the port that you defined
 - **username** it will define a username. By default it will just generate a random username.
 
 #### 〔DEPLOYMENT EXAMPLE〕
 
 ```bash
 
-go run main.go -relay "localhost:9090" -update -http-server 6969 # instantiate full spectrum node
+go run main.go -relay "localhost:9090" -update -http 6969 # instantiate full spectrum node
 ```
 
 ![image](https://github.com/user-attachments/assets/69b10aa2-a19b-47ed-951c-1bb07a9d80a8)
