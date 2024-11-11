@@ -20,14 +20,14 @@ go run main.go
 
 Here are the main parameters you can use to customize the execution:
 
-- **relay**: Specifies the address of the relay to connect to. The default setting is `localhost:9090`.
+- **relay**: Specifies the address of the relay to connect to. 
 - **-update**: Controls whether the database should be updated when the service starts. By default it will not update.
 - **http-server** it will start an http server at the port that you defined
 - **username** it will define a username. By default it will just generate a random username.
 #### Example Usage
 
 ```bash
-go run main.go -relay "localhost:9090"   -update -http-server 6969
+go run main.go -relay "localhost:9090"   -update -http-server 6969 -relay localhost:9090
 ```
 
 ![image](https://github.com/user-attachments/assets/69b10aa2-a19b-47ed-951c-1bb07a9d80a8)
