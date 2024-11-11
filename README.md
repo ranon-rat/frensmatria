@@ -20,10 +20,8 @@ go run main.go
 #### 【COMMANDS】
 Configure your node's behavior through these parameters:
 
-- **relay**: Specifies the address of the relay to connect to. 
-
+- **relay**: Specifies the address of the relay to connect to.
 - **update**: Controls whether the database should be updated when the service starts. By default it will not update.
->>>>>>> 4495c6bf39883f9412fdc96478da71bb8f8e1e6f
 - **http** it will start an http server at the port that you defined
 - **username** it will define a username. By default it will just generate a random username.
 
