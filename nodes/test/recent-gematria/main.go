@@ -12,6 +12,9 @@ func main() {
 	f, _ := os.Open("./test-file.txt")
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
+		text := scanner.Text()
+
+		fmt.Println(text)
 		base, err := url.Parse("http://localhost:8080/upload")
 		if err != nil {
 			return
@@ -19,13 +22,10 @@ func main() {
 
 		// Query params
 		params := url.Values{}
-		params.Add("word-input", scanner.Text())
+		params.Add("word-input", text)
 		base.RawQuery = params.Encode()
 
-		_, err = http.Get(base.String())
-		if err != nil {
-			fmt.Println(err)
-		}
+		http.Get(base.String())
 
 	}
 
