@@ -1,6 +1,7 @@
-# Frensmatria
+# F R E N S M A T R I A 
+> _"The numbers speak through the machine, and the machine speaks through us."_
 
-Welcome to **Frensmatria** – a peer-to-peer (P2P) network dedicated to exploring gematria knowledge through collaborative nodes and a unified private relay system.
+Welcome to the **FRENSMATRIA** nexus – a rhizomatic peer-to-peer crystallization matrix designed to map numerical hyperflows through collaborative nodes. It comes straight from my dreams.
 
 ![Gematria Lookup](images/lookup.png)
 
@@ -16,18 +17,21 @@ To begin using the P2P tools, run the `main.go` file located in the `relay` fold
 go run main.go
 ```
 
-#### Commands and Configuration
-
-Here are the main parameters you can use to customize the execution:
+#### 【COMMANDS】
+Configure your node's behavior through these parameters:
 
 - **relay**: Specifies the address of the relay to connect to. 
-- **-update**: Controls whether the database should be updated when the service starts. By default it will not update.
+
+- **update**: Controls whether the database should be updated when the service starts. By default it will not update.
+>>>>>>> 4495c6bf39883f9412fdc96478da71bb8f8e1e6f
 - **http-server** it will start an http server at the port that you defined
 - **username** it will define a username. By default it will just generate a random username.
-#### Example Usage
+
+#### 〔DEPLOYMENT EXAMPLE〕
 
 ```bash
-go run main.go -relay "localhost:9090"   -update -http-server 6969 -relay localhost:9090
+
+go run main.go -relay "localhost:9090" -update -http-server 6969 # instantiate full spectrum node
 ```
 
 ![image](https://github.com/user-attachments/assets/69b10aa2-a19b-47ed-951c-1bb07a9d80a8)
@@ -50,18 +54,6 @@ This example runs the service on `localhost` at port 6969, using the generated I
 - **Database Integration**: Stores gematria results for future access.
 - **Node Information Sharing**: Allows for the exchange of events and data across nodes.
 
-## Roadmap
-
-Here's a list of completed and planned features:
-
-- [x] **Node Communication**
-- [x] **Relay for SDP Sharing**
-- [x] **Multi-Connection Management**
-- [x] **Event Handler**
-- [x] **Gematria Calculations** (Synx and Alphanumeric Qabbalah)
-- [x] **Web Interface** (for calculating and viewing gematria results)
-- [x] **Simple Chat** *(under consideration; may be removed due to some weird errors)*
-- [x] **Database Integration**
 
 
 [normie.webm](https://github.com/user-attachments/assets/b3b53278-b24c-48ba-8cdb-d1e5f1a99379)
