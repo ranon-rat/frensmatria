@@ -48,7 +48,7 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 		if db.AddGematria(g.Content, g.Date) == nil {
 			core.LogColor(color.New(color.FgGreen).Sprint("sending event:"), color.New(color.FgHiYellow).Sprint("new"), g.Content)
 
-			channels.SendMessage(fmt.Sprintf("new %s", core.Object2Base64(g)), ID)
+			go channels.SendMessage(fmt.Sprintf("new %s", core.Object2Base64(g)), ID)
 		}
 	case "get":
 		date, _ := strconv.Atoi(information[1])
@@ -77,7 +77,7 @@ func OnMessage(conn ConnectionID, msg webrtc.DataChannelMessage) {
 			return
 		}
 		MsgCache[information[1]] = true
-		channels.SendMessage(fmt.Sprintf("message %s", core.Object2Base64(msg)), ID)
+		go channels.SendMessage(fmt.Sprintf("message %s", core.Object2Base64(msg)), ID)
 		go func() {
 			controllers.Message <- msg
 		}()

@@ -47,7 +47,7 @@ func CompareResults(compare map[string]map[string]int, currentDate int) {
 			}
 			date := GetBiggerDate(dates)
 			if newInput {
-				channels.SendMessage(fmt.Sprintf("new %s", core.Object2Base64(core.GematriaSharing{
+				go channels.SendMessage(fmt.Sprintf("new %s", core.Object2Base64(core.GematriaSharing{
 					Content: input,
 					Date:    date,
 				})), id)

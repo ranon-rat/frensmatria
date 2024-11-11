@@ -64,7 +64,7 @@ func ReceiveMessages(ws *websocket.Conn) {
 		}
 		msg.Timestamp = int(time.Now().UnixNano())
 		msg.Username = core.Username
-		channels.SendMessage(fmt.Sprintf("message %s", core.Object2Base64(msg)), "")
+		go channels.SendMessage(fmt.Sprintf("message %s", core.Object2Base64(msg)), "")
 		Message <- msg
 	}
 
