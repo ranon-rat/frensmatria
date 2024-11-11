@@ -1,7 +1,7 @@
-# 【F▄R▀E▄N▀S▄M▀A▄T▀R▄I▀A▄】
+# F R E N S M A T R I A 
+> _"The numbers speak through the machine, and the machine speaks through us."_
 
-
-Welcome to the **FRENSMATRIA** nexus – a rhizomatic peer-to-peer crystallization matrix designed to map numerical hyperflows through collaborative biomechanical nodes and quantum relay systems. This is not merely software; it's a xenomorphic knowledge engine feeding on collective numerical gnosis.
+Welcome to the **FRENSMATRIA** nexus – a rhizomatic peer-to-peer crystallization matrix designed to map numerical hyperflows through collaborative nodes. It comes straight from my dreams.
 
 ![Gematria Lookup](images/lookup.png)
 
@@ -51,7 +51,6 @@ This example runs the service on `localhost` at port 6969, using the generated I
 - **Database Integration**: Stores gematria results for future access.
 - **Node Information Sharing**: Allows for the exchange of events and data across nodes.
 
-_"The numbers speak through the machine, and the machine speaks through us."_
 
 
 [normie.webm](https://github.com/user-attachments/assets/b3b53278-b24c-48ba-8cdb-d1e5f1a99379)
