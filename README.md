@@ -1,6 +1,7 @@
 <h1 align="center">
  F R E N S M A T R I A 
 </h1>
+
 > _"The numbers speak through the machine, and the machine speaks through us."_
 
 Welcome to the **FRENSMATRIA** nexus – a rhizomatic peer-to-peer crystallization matrix designed to map numerical hyperflows through collaborative nodes. It comes straight from my dreams.
